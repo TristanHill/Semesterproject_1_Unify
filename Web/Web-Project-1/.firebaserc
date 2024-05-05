@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "semesterproject-1": {
+      "hosting": {
+        "Web-Project-1": [
+          "semesterproject-1"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "semesterproject-1"
+  }
+}
