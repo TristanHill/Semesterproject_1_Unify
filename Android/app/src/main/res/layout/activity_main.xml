@@ -8,12 +8,27 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/activity_main_tv_sessionscan_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:fontFamily="sans-serif-black"
+        android:text="QR-Code Session Scanner"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.368" />
+
+    <Button
+        android:id="@+id/activity_main_button_scanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Scan QR-Code"
+        app:layout_constraintEnd_toEndOf="@+id/activity_main_tv_sessionscan_text"
+        app:layout_constraintStart_toStartOf="@+id/activity_main_tv_sessionscan_text"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_tv_sessionscan_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
