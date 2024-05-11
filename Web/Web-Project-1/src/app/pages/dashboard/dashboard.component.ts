@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -10,20 +11,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
   
     content = "halla";
 
-    constructor(private sessionService: SessionService){
+    constructor(private sessionService: SessionService, private router: Router){
 
     }
 
     ngOnInit(): void {
-      this.sessionService.getSessionRef()?.subscribe((ref: any) => {
-        console.log("dashboard oninit");
-        
-        console.log(ref);
-        console.log(ref.payload.data());
-        this.content = ref.payload.data().participantCount;
+      this.sessionService.getSessionRef()?.snapshotChanges().subscribe((ref: any) => {
+       
+      })
+
+      this.sessionService.getUserRef()?.snapshotChanges().subscribe((ref: any) => {
+       
       })
     }
     ngOnDestroy(): void {
       
+    }
+
+    deleteSession(){
+      this.sessionService.deleteSession().then(() => {
+        this.router.navigate(['/create-session']);
+      })
     }
 }
