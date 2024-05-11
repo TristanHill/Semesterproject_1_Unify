@@ -16,21 +16,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-      this.sessionService.getSessionRef()?.snapshotChanges().subscribe((ref: any) => {
-       
-      })
-
-      this.sessionService.getUserRef()?.snapshotChanges().subscribe((ref: any) => {
-       
-      })
+      
     }
     ngOnDestroy(): void {
       
     }
 
-    deleteSession(){
-      this.sessionService.deleteSession().then(() => {
-        this.router.navigate(['/create-session']);
-      })
-    }
+   
 }

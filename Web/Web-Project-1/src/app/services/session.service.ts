@@ -57,8 +57,6 @@ export class SessionService {
       
       this.sessionRef = this.store.collection("Session").doc(ref.id);
       this.userRef = this.store.collection("Session").doc(ref.id).collection("User");
-
-      this.userRef.add({username: "Trisis"});
     })
   }
 }
