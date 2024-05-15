@@ -18,6 +18,7 @@ export class SessionService {
     this.sessionId = sessionStorage.getItem(this.sessionStorageKey);
     if(this.sessionId){
       this.sessionRef = this.store.collection("Session").doc(this.sessionId);
+      this.userRef = this.store.collection("Session").doc(this.sessionId).collection("User");
     }
   }
 

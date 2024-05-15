@@ -16,10 +16,7 @@ export class QrCodeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sessionService.getSessionRef()?.snapshotChanges().subscribe((ref: any) => {
-
-    })
-
+  
     this.sessionService.getUserRef()?.ref.onSnapshot((querySnapshot) => {
       
       this.activePartisipants = querySnapshot.size;

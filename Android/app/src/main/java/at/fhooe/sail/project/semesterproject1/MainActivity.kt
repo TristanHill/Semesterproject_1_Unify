@@ -1,10 +1,13 @@
 package at.fhooe.sail.project.semesterproject1
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import android.content.Intent
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -30,22 +33,41 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        db.collection("Test")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    Log.d(TAG, "${document.id} => ${document.data}")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents.", exception)
-            }
+
 
         // Button zum Starten der QRCodeScannerActivity
+        val startForResult = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val sessionId = result.data?.getStringExtra("SessionId")
+                val userId = result.data?.getStringExtra("UserId")
+                Log.w(TAG,result.data?.getStringExtra("SessionId").toString())
+                Log.w(TAG,result.data?.getStringExtra("UserId").toString())
+
+                if (sessionId != null && userId != null) {
+                    db.collection("Session").document(sessionId)
+                        .addSnapshotListener { snapshot, e ->
+                            if (e != null) {
+                                Log.w(TAG, "Listen failed.", e)
+                                return@addSnapshotListener
+                            }
+
+                            if (snapshot != null && snapshot.exists()) {
+                                Log.d(TAG, "Current data: ${snapshot.data}")
+                            } else {
+                                db.collection("Session")
+                                    .document(sessionId)
+                                    .collection("User")
+                                    .document(userId).delete()
+                            }
+                        }
+                }
+            }
+        }
         val scannerButton: Button = findViewById(R.id.activity_main_button_scanner)
         scannerButton.setOnClickListener {
-            val intent = Intent(this, QRCodeScannerActivity::class.java)
-            startActivity(intent)
+            startForResult.launch(Intent(this, QRCodeScannerActivity::class.java))
         }
     }
 }

@@ -1,6 +1,8 @@
 package at.fhooe.sail.project.semesterproject1
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -16,8 +18,7 @@ class QRCodeScannerActivity : AppCompatActivity() {
         } else {
             val scannedData = result.contents
             Toast.makeText(this, "scanned: $scannedData", Toast.LENGTH_LONG).show()
-            updateResults(scannedData)
-            sendToFirebase(scannedData)
+            createUser(scannedData)
         }
     }
 
@@ -39,19 +40,32 @@ class QRCodeScannerActivity : AppCompatActivity() {
         barcodeLauncher.launch(options)
     }
 
-    private fun updateResults(scannedData: String) {
+    private fun createUser(scannedData: String) {
         val resultsTextView: TextView = findViewById(R.id.scan_results)
         resultsTextView.text = scannedData
-    }
 
-    private fun sendToFirebase(scannedData: String) {
+        val userData = hashMapOf(
+            "status" to "done",
+        )
+
+
         val db = FirebaseFirestore.getInstance()
-        db.collection("ScannedData").add(mapOf("data" to scannedData))
+
+        db.collection("Session")
+            .document(scannedData)
+            .collection("User")
+            .add(userData)
             .addOnSuccessListener { documentReference ->
-                Toast.makeText(this, "Data Succesfully Transferred. ID: ${documentReference.id}", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
+                val intent = Intent()
+                intent.putExtra("SessionId", scannedData)
+                intent.putExtra("UserId", documentReference.id)
+                setResult(RESULT_OK, intent)
+                finish()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error Ocurred when Transferred: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.w(TAG, "Error adding document", e)
             }
     }
+
 }
