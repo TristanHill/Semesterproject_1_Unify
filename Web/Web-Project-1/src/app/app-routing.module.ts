@@ -3,11 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateSessionComponent } from './pages/create-session/create-session.component';
 import { dashboardGuard } from './guards/dashboard.guard';
+import { QuestionComponent } from './pages/dashboard/question/question.component';
+import { SurveyComponent } from './pages/dashboard/survey/survey.component';
+import { DiagramComponent } from './pages/dashboard/diagram/diagram.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [dashboardGuard] },
   { path: 'create-session', component: CreateSessionComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [dashboardGuard], children: [
+    { path: 'question', component: QuestionComponent },
+    { path: 'status', component: DiagramComponent },
+    { path: 'survey', component: SurveyComponent },
+    { path: '', component: QuestionComponent },
+
+  ] },
   { path: '**', redirectTo: '/dashboard', pathMatch: 'full'  },
 ];
 
