@@ -1,20 +1,34 @@
 package at.fhooe.sail.project.semesterproject1
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import at.fhooe.sail.project.semesterproject1.databinding.ActivityJoinSessionBinding
 
-class join_session : AppCompatActivity() {
+class JoinSessionActivity : AppCompatActivity(), View.OnClickListener {
+
+    lateinit var binding: ActivityJoinSessionBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_join_session)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityJoinSessionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Set click listener for the "Join Session" button
+        binding.activityJoinSessionButton.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.activity_join_session_button -> {
+                // Start QRCodeScannerActivity when the "Join Session" button is clicked
+                startActivity(Intent(this, QRCodeScannerActivity::class.java))
+            }
+            else -> {
+                Log.e(TAG, "JoinSessionActivity::onClick unexpected ID encountered (${v?.id})")
+            }
         }
     }
 }

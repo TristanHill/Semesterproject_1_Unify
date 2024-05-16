@@ -1,3 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="unify">
+        <item name="android:textSize">64sp</item>
+        <item name="android:textColor">#FFFBFB</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <style name="lets_start">
+        <item name="android:textSize">36sp</item>
+        <item name="android:textColor">#FFFBFB</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <style name="intro" parent="lets_start">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#FFFBFB</item>
+        <item name="android:shadowColor">#40000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">4</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <style name="green_button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/button_green</item>
+    </style>
+
 </resources>

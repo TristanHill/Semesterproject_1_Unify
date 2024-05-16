@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Semesterproject1</string>
+    <string name="text_unify">Unify</string>
+    <string name="text_lets_start">Let\'s Get Started</string>
+    <string name="text_intro">Easiest Way To Interact With Your Lecturer</string>
+    <string name="text_button_join_session">Join Session</string>
+    <string name="text_button_scan_qr_code">Scan QR Code</string>
+    <string name="text_scan_result">Scan Results Appear Here</string>
+
 </resources>

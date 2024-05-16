@@ -2,9 +2,69 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/activity_join_session_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".join_session">
+    android:background="@color/background_darkblue"
+    tools:context=".JoinSessionActivity">
+
+    <!-- TextView with layout_marginBottom -->
+    <TextView
+        android:id="@+id/activity_join_session_tv_unify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="200dp"
+        android:fontFamily="@font/monofett"
+        android:gravity="top"
+        android:text="@string/text_unify"
+        android:textAppearance="@style/unify"
+        android:textSize="70sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_join_session_tv_letsStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/helvetica_neue_bold"
+        android:gravity="top"
+        android:text="@string/text_lets_start"
+        android:textAppearance="@style/lets_start"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="@+id/activity_join_session_tv_unify"
+        app:layout_constraintTop_toBottomOf="@+id/activity_join_session_tv_unify" />
+
+    <TextView
+        android:id="@+id/activity_join_session_tv_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="@font/helvetica_neue_medium"
+        android:gravity="top"
+        android:text="@string/text_intro"
+        android:textAppearance="@style/intro"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/activity_join_session_tv_letsStart"
+        app:layout_constraintTop_toBottomOf="@+id/activity_join_session_tv_letsStart" />
+
+    <Button
+        android:id="@+id/activity_join_session_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="75dp"
+        android:layout_marginRight="75dp"
+        android:layout_marginBottom="105dp"
+        android:hapticFeedbackEnabled="false"
+        android:text="@string/text_button_join_session"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
