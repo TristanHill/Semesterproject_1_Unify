@@ -2,11 +2,15 @@
     <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
                  [fixedInViewport]="true" [fixedTopGap]="0"
                  [fixedBottomGap]="0">
-        Sidenav
+        <button mat-button [routerLink]="'/dashboard/question'">Questions</button>
+        <button mat-button [routerLink]="'/dashboard/status'">Status</button>
+        <button mat-button [routerLink]="'/dashboard/survey'">Survey</button>
+
     </mat-sidenav>
 
     <mat-sidenav-content >
-        {{content}}
+       <router-outlet></router-outlet>
+        <app-notification></app-notification>
         <app-qr-code></app-qr-code>
         
     </mat-sidenav-content>

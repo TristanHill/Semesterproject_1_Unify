@@ -22,6 +22,12 @@ import { CreateSessionComponent } from './pages/create-session/create-session.co
 import { MatButtonModule } from '@angular/material/button';
 import { QRCodeModule } from 'angularx-qrcode';
 import { QrCodeComponent } from './pages/dashboard/qr-code/qr-code.component';
+import { NotificationComponent } from './pages/dashboard/notification/notification.component';
+import { NotificationItemComponent } from './pages/dashboard/notification/notification-item/notification-item.component';
+import { QuestionComponent } from './pages/dashboard/question/question.component';
+import { QuestionItemComponent } from './pages/dashboard/question/question-item/question-item.component';
+import { SurveyComponent } from './pages/dashboard/survey/survey.component';
+import { DiagramComponent } from './pages/dashboard/diagram/diagram.component';
 
 
 
@@ -31,7 +37,13 @@ import { QrCodeComponent } from './pages/dashboard/qr-code/qr-code.component';
     AppComponent,
     DashboardComponent,
     CreateSessionComponent,
-    QrCodeComponent
+    QrCodeComponent,
+    NotificationComponent,
+    NotificationItemComponent,
+    QuestionComponent,
+    QuestionItemComponent,
+    SurveyComponent,
+    DiagramComponent
   ],
   imports: [
     BrowserModule,
