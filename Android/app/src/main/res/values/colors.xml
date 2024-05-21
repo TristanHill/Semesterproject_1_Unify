@@ -2,9 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="red">#F24A72</color>
     <color name="green">#7AD67D</color>
     <color name="orange">#FDAF75</color>
     <color name="fontBlue">#141E46</color>
+
+    <color name="button_green">#25B947</color>
+    <color name="background_darkblue">#141E46</color>
 
 </resources>
