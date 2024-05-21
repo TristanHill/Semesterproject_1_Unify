@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_status">
+    tools:context=".MainActivity2">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -14,12 +14,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu">
-
+        app:menu="@menu/bottom_nav_menu"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:labelVisibilityMode="unlabeled"
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemIconSize="50sp"
+        app:backgroundTint="@color/white"
+        >
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <FrameLayout
-        android:id="@+id/activity_status_frameLayout"
+        android:id="@+id/activity_main_frameLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
