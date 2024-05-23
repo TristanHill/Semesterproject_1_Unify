@@ -4,13 +4,16 @@
     <item
         android:id="@+id/status_item"
         android:title="@string/status_item"
-        android:icon="@drawable/status_icon"/>
+        android:icon="@drawable/status_icon"
+        android:tint="@color/fontBlue"/>
     <item
         android:id="@+id/question_item"
         android:title="@string/question_item"
-        android:icon ="@drawable/question_icon"/>
+        android:icon ="@drawable/question_icon"
+        android:tint="@color/fontBlue"/>
     <item
         android:id="@+id/survey_item"
         android:title="@string/survey_item"
-        android:icon="@drawable/survey_icon"/>
+        android:icon="@drawable/survey_icon"
+        android:tint="@color/fontBlue"/>
 </menu>

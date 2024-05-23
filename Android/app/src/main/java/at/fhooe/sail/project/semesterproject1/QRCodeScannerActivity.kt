@@ -20,6 +20,8 @@ class QRCodeScannerActivity : AppCompatActivity() {
         } else {
             val scannedData = result.contents
             Toast.makeText(this, "scanned: $scannedData", Toast.LENGTH_LONG).show()
+            val i:Intent= Intent(this, MainActivity::class.java)
+            startActivity(i)
             createUser(scannedData)
         }
     }
