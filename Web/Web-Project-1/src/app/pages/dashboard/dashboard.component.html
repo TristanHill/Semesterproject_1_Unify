@@ -1,17 +1,26 @@
-<mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" opened class="example-sidenav"
-                 [fixedInViewport]="true" [fixedTopGap]="0"
-                 [fixedBottomGap]="0">
+<div class="sidenav-container">
+    <mat-card class="sidenav">
+      <h2>{{getSessionName()}}</h2>
+      <mat-nav-list>
         <button mat-button [routerLink]="'/dashboard/question'">Questions</button>
         <button mat-button [routerLink]="'/dashboard/status'">Status</button>
         <button mat-button [routerLink]="'/dashboard/survey'">Survey</button>
-
-    </mat-sidenav>
-
-    <mat-sidenav-content >
-       <router-outlet></router-outlet>
-        <app-notification></app-notification>
-        <app-qr-code></app-qr-code>
         
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+        <button class="bottom-button" mat-button (click)="deleteSession()">Delete Session</button>
+      </mat-nav-list>
+    </mat-card>
+    <mat-card class="main-content">
+        <mat-card class="big-section">
+            <router-outlet></router-outlet>
+        </mat-card>
+        <div class="side-sections">
+          <mat-card class="small-section">
+            <app-notification></app-notification>
+        </mat-card>
+          <mat-card class="small-section">
+            <app-qr-code></app-qr-code>
+          </mat-card>
+        </div>
+    </mat-card>
+</div>
+  

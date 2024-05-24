@@ -1,1 +1,13 @@
-<p>survey works!</p>
+<mat-form-field class="question-input">
+    <input matInput name="surveyText" type="text" placeholder="Ask a question" [(ngModel)]="surveyTitle">
+</mat-form-field>
+<mat-form-field *ngFor="let option of surveyOptions; index as i; trackBy: trackByIndex">
+    <input matInput [name]="'option'+(i+1)" type="text" [placeholder]="'Option '+(i+1)" [(ngModel)]="surveyOptions[i]">
+    <button *ngIf="surveyOptions.length > 2" matSuffix mat-icon-button aria-label="Delete" (click)="removeOption(i)">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+<div class="" button-container>
+    <button mat-button (click)="addOption()">+ add option</button>
+    <button mat-button (click)="submit()">Create Poll</button>
+</div>

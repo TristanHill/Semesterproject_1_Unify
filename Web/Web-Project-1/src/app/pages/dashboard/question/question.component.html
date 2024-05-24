@@ -1,3 +1,7 @@
-<h1 *ngIf="questionList.length == 0">No Questions Yet</h1>
 
-<app-question-item *ngFor="let question of questionList" [question]="question"></app-question-item>
+<div class="container">
+    <h1 *ngIf="questionList.length == 0" class="no-questions-text">No Questions Yet</h1>
+    <div class="question-container">
+        <app-question-item *ngFor="let question of questionList" [question]="question"></app-question-item>
+    </div>
+</div>

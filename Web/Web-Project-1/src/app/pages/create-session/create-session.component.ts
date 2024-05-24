@@ -8,13 +8,15 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./create-session.component.scss']
 })
 export class CreateSessionComponent {
+  sessionName: string = "";
 
   constructor(private sessionService: SessionService, private router: Router){
 
   }
 
   createSession() {
-    this.sessionService.createSession().then((_:any) => {
+    this.sessionName = this.sessionName.trim().length == 0 ? "Unify Session" : this.sessionName;
+    this.sessionService.createSession(this.sessionName).then((_:any) => {
       this.router.navigate(['/dashboard'])
     });
     

@@ -29,7 +29,11 @@ import { QuestionItemComponent } from './pages/dashboard/question/question-item/
 import { SurveyComponent } from './pages/dashboard/survey/survey.component';
 import { DiagramComponent } from './pages/dashboard/diagram/diagram.component';
 import { HighchartsChartModule } from 'highcharts-angular';
-
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -52,6 +56,11 @@ import { HighchartsChartModule } from 'highcharts-angular';
     AngularFirestoreModule,
     QRCodeModule,
     HighchartsChartModule,
+    MatInputModule,
+    FormsModule,
+    MatIconModule,
+    MatListModule,
+    MatCardModule,
     provideFirebaseApp(() => initializeApp({ "projectId": "semesterproject-1", "appId": "1:601327501979:web:5822d630b2685f2cab3c3e", "storageBucket": "semesterproject-1.appspot.com", "apiKey": "AIzaSyDclX8dRbeX42Q3wjAavWwSxkGCYucqO88", "authDomain": "semesterproject-1.firebaseapp.com", "messagingSenderId": "601327501979", "measurementId": "G-WEMNJBXDS7" })),
     provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()),

@@ -8,8 +8,6 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  
-    content = "halla";
 
     constructor(private sessionService: SessionService, private router: Router){
 
@@ -20,6 +18,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy(): void {
       
+    }
+
+    getSessionName(){
+      return this.sessionService.getSessionName();
+    }
+
+    deleteSession() {
+      this.sessionService.deleteSession().then(() => {
+        this.router.navigate(['/create-session']);
+      })
     }
 
    

@@ -1,3 +1,5 @@
-<p>create-session works!</p>
-
-<button mat-button (click)="createSession()">Create Session</button>
+<div class="center-container">
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <input type="text" class="text-input" placeholder="Sessionname (optional)" [(ngModel)]="sessionName">
+    <button class="submit-button" (click)="createSession()">Start Session</button>
+</div>

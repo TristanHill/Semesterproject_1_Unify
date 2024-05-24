@@ -6,6 +6,8 @@ import { dashboardGuard } from './guards/dashboard.guard';
 import { QuestionComponent } from './pages/dashboard/question/question.component';
 import { SurveyComponent } from './pages/dashboard/survey/survey.component';
 import { DiagramComponent } from './pages/dashboard/diagram/diagram.component';
+import { surveyGuard } from './guards/survey.guard';
+import { surveyResultGuard } from './guards/survey-result.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -13,7 +15,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [dashboardGuard], children: [
     { path: 'question', component: QuestionComponent },
     { path: 'status', component: DiagramComponent },
-    { path: 'survey', component: SurveyComponent },
+    { path: 'survey', component: SurveyComponent, canActivate: [surveyGuard] },
+    { path: 'survey/result', component: DiagramComponent, canActivate: [surveyResultGuard] },
     { path: '', component: QuestionComponent },
 
   ] },

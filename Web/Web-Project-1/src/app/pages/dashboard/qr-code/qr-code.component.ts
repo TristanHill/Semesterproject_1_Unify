@@ -17,9 +17,9 @@ export class QrCodeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
   
-    this.sessionService.getUserRef()?.ref.onSnapshot((querySnapshot) => {
+    this.sessionService.getUserRef()?.get().subscribe((snapshot) => {
       
-      this.activePartisipants = querySnapshot.size;
+      this.activePartisipants = snapshot.size;
     });
 
     
@@ -32,9 +32,5 @@ export class QrCodeComponent implements OnInit, OnDestroy {
     return this.sessionService.getCurrentSessionId()!;
   }
 
-  deleteSession() {
-    this.sessionService.deleteSession().then(() => {
-      this.router.navigate(['/create-session']);
-    })
-  }
+  
 }
