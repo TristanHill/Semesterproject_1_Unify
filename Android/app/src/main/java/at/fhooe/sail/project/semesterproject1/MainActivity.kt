@@ -11,6 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import at.fhooe.sail.project.semesterproject1.databinding.ActivityMainBinding
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
@@ -19,15 +21,37 @@ const val TAG: String = "Main"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var db: FirebaseFirestore
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         db = Firebase.firestore
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        replaceFragment(Fragment_question())
+
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.status_item -> replaceFragment(Fragment_status())
+                R.id.question_item -> replaceFragment(Fragment_question())
+                R.id.survey_item -> replaceFragment(Fragment_survey())
+                else -> {}
+            }
+
+            true
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.activity_main_frameLayout, fragment)
+        fragmentTransaction.commit()
+    }
+
+       /* ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.activity_join_session_main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -68,6 +92,5 @@ class MainActivity : AppCompatActivity() {
         val scannerButton: Button = findViewById(R.id.activity_main_button_scanner)
         scannerButton.setOnClickListener {
             startForResult.launch(Intent(this, QRCodeScannerActivity::class.java))
-        }
-    }
+        } */
 }

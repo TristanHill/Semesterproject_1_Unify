@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Semesterprojekt1</string>
+    <string name="text_unify">Unify</string>
+    <string name="text_lets_start">Legen Wir Los!</string>
+    <string name="text_intro">Der Weg Zur Interaktion Mit Deinem Referenten/Dozenten</string>
+    <string name="text_button_join_session">Session Beitreten</string>
+    <string name="text_button_scan_qr_code">QR-Code Scannen</string>
+    <string name="text_scan_result">Scanergebnisse erscheinen hier</string>
+    <string name="status_item">Status</string>
+    <string name="question_item">Fragen</string>
+    <string name="survey_item">Abstimmung</string>
+</resources>
