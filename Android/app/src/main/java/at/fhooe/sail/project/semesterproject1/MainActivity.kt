@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val sessionID = sharedPref.getString("SessionID", null)
+        val userID = sharedPref.getString("UserID", null)
+
         db = Firebase.firestore
 
         replaceFragment(Fragment_question())

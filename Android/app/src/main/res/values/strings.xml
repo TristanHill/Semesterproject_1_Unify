@@ -12,4 +12,5 @@
     <string name="text_button_join_session">Join Session</string>
     <string name="text_button_scan_qr_code">Scan QR Code</string>
     <string name="text_scan_result">Scan Results Appear Here</string>
+    <string name="scan_success">Scan Successful!</string>
 </resources>
