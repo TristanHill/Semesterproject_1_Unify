@@ -14,7 +14,7 @@ export class DiagramComponent implements OnInit, OnDestroy {
    surveyOptions: string[] = [];
 
    chartTitle: string = '';
-   chartSubTitle: string = '';
+   //chartSubTitle: string = '';
    chartData: [string, number][] = [];
    chartBarColors: string[] | undefined = undefined;
 
@@ -29,9 +29,9 @@ export class DiagramComponent implements OnInit, OnDestroy {
       title: {
          text: this.chartTitle
       },
-      subtitle: {
-         text: this.chartSubTitle
-      },
+     // subtitle: {
+     //    text: this.chartSubTitle
+    //  },
       tooltip: {
          enabled: false
       },
@@ -84,7 +84,7 @@ export class DiagramComponent implements OnInit, OnDestroy {
 
          if (this.isSurvey && survey) {
             this.chartTitle = survey.surveyTitle;
-            this.chartSubTitle = 'Vote Count';
+           // this.chartSubTitle = 'Vote Count';
             this.surveyOptions = survey.surveyOptions;
             this.chartData = survey.surveyOptions.map((key: string) => {
                return [key, 0];
@@ -93,7 +93,7 @@ export class DiagramComponent implements OnInit, OnDestroy {
 
          } else {
             this.chartTitle = 'Participant Status';
-            this.chartSubTitle = 'Vote Count';
+          //  this.chartSubTitle = 'Vote Count';
             this.chartData = [['Need Help', 0], ['In Progress', 0], ['done', 0]];
             this.chartBarColors = ['#F24A72', '#FDAF75', '#7AD67D'];
          }
@@ -128,9 +128,9 @@ export class DiagramComponent implements OnInit, OnDestroy {
       this.chartOptions.title = {
          text: this.chartTitle
       }
-      this.chartOptions.subtitle = {
-         text: this.chartSubTitle
-      }
+      //this.chartOptions.subtitle = {
+      //   text: this.chartSubTitle
+      //}
       this.chartOptions.series![0] = {
          name: undefined,
          data: this.chartData,
