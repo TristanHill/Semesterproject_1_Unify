@@ -16,9 +16,9 @@ export class QuestionComponent {
 
   ngOnInit(): void {
 
-    this.sessionService.getSessionRef()?.get().subscribe((session: any) => {
-
-      this.questionList = session.data().questionList;
+    this.sessionService.getSessionRef()?.valueChanges().subscribe((session: any) => {
+      console.log(session)
+      this.questionList = session.questionList;
 
     })
   }
