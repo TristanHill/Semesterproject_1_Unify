@@ -1,10 +1,14 @@
 package at.fhooe.sail.project.semesterproject1
 
 import android.app.Activity
+import android.content.ClipData
 import android.os.Bundle
 import android.util.Log
 import android.content.Intent
+import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -34,17 +38,27 @@ class MainActivity : AppCompatActivity() {
 
         db = Firebase.firestore
 
+        val sessionName =findViewById<TextView>(R.id.toolbar_session_name)
+        sessionName.setText("Affenstark") //variable to shared preferences/session name should be put here, "Unify" if no Sessionname has been set
+
         replaceFragment(Fragment_question())
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.status_item -> replaceFragment(Fragment_status())
+                R.id.status_item ->{
+                    replaceFragment(Fragment_status())
+                }
                 R.id.question_item -> replaceFragment(Fragment_question())
                 R.id.survey_item -> replaceFragment(Fragment_survey())
                 else -> {}
             }
-
             true
+        }
+
+        val leaveButton = findViewById<ImageView>(R.id.toolbar_leave_session)
+        leaveButton.setOnClickListener{
+            //delete user!!
+            finish()
         }
     }
 
