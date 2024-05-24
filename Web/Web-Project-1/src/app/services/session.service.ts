@@ -73,7 +73,7 @@ export class SessionService {
   createSession(sessionName: string): Promise<any> {
 
     this.sessionName = sessionName;
-    return this.store.collection("Session").add({ name: sessionName, survey: null }).then((ref: any) => {
+    return this.store.collection("Session").add({ name: sessionName, survey: null, questionList: [] }).then((ref: any) => {
 
       this.sessionId = ref.id;
       sessionStorage.setItem(this.sessionStorageKey, this.sessionId!);
