@@ -34,12 +34,16 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
         val sessionID = sharedPref.getString("SessionID", null)
-        val userID = sharedPref.getString("UserID", null)
+        // val sessionName = sharedPref.getString("SessionName", null)
+        // val userID = sharedPref.getString("UserID", null)
 
         db = Firebase.firestore
 
-        val sessionName =findViewById<TextView>(R.id.toolbar_session_name)
-        sessionName.setText("Affenstark") //variable to shared preferences/session name should be put here, "Unify" if no Sessionname has been set
+        val sessionName = findViewById<TextView>(R.id.toolbar_session_name)
+
+        //TODO get Session Name from QR-Code
+        //TODO variable to shared preferences/session name should be put here, "Unify" if no Sessionname has been set
+        sessionName.setText(sessionID.toString())
 
         replaceFragment(Fragment_question())
 
@@ -57,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         val leaveButton = findViewById<ImageView>(R.id.toolbar_leave_session)
         leaveButton.setOnClickListener{
-            //delete user!!
+            //TODO delete user!!
             finish()
         }
     }
@@ -81,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         val startForResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
+            if (result.resultCode == Activity.RESULT_OsK) {
                 val sessionId = result.data?.getStringExtra("SessionId")
                 val userId = result.data?.getStringExtra("UserId")
                 Log.w(TAG,result.data?.getStringExtra("SessionId").toString())

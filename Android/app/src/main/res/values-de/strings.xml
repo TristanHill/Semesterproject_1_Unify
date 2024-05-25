@@ -11,4 +11,8 @@
     <string name="question_item">Fragen</string>
     <string name="survey_item">Abstimmung</string>
     <string name="scan_success">Scan erfolgreich!</string>
+    <string name="text_button_working">Ich bin an der Arbeit!</string>
+    <string name="text_button_help">Ich benötige Hilfe!</string>
+    <string name="text_button_done">Ich bin fertig!</string>
+    <string name="text_status_description">Ändere deinen Status um zu zeigen wo du mit deiner Arbeit bist.</string>
 </resources>

@@ -7,8 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import at.fhooe.sail.project.semesterproject1.databinding.ActivityQrscannerBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
-import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
@@ -38,8 +36,8 @@ class QRCodeScannerActivity : AppCompatActivity() {
             .addOnSuccessListener { barcode ->
                 val scannedData = barcode.rawValue ?: ""
                 val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
                 createUser(scannedData)
+                startActivity(intent)
             }
             .addOnCanceledListener {
                 Toast.makeText(this, "Scan abgebrochen", Toast.LENGTH_LONG).show()
@@ -50,8 +48,6 @@ class QRCodeScannerActivity : AppCompatActivity() {
     }
 
     private fun createUser(scannedData: String) {
-        val resultsTextView = binding.scanResults
-        resultsTextView.text = scannedData
 
         val userData = hashMapOf(
             "status" to "done"
@@ -67,10 +63,12 @@ class QRCodeScannerActivity : AppCompatActivity() {
                 Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
 
                 // Store SessionID and UserID in SharedPreferences
+                // TODO Send SessionID, UserID and user Name in the QR code and seperate them to put into shared preferences
                 val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
                 with(sharedPref.edit()) {
                     putString("SessionID", scannedData)
-                    putString("UserID", documentReference.id)
+                    // putString("UserID", scannedData)
+                    // putString("SessionName, scannedData)
                     apply()
                 }
             }
@@ -78,6 +76,7 @@ class QRCodeScannerActivity : AppCompatActivity() {
                 Log.w(TAG, "Error adding document", e)
             }
     }
+
     companion object {
         private const val TAG = "QRCodeScannerActivity"
     }

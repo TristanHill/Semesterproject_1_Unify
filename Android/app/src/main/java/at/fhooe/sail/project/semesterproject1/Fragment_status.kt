@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
+import at.fhooe.sail.project.semesterproject1.databinding.FragmentStatusBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +20,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Fragment_status : Fragment() {
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,7 +38,26 @@ class Fragment_status : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_status, container, false)
+        val binding = FragmentStatusBinding.inflate(inflater, container, false)
+
+        //TODO Send String to firebase when button is clicked
+        binding.fragmentStatusButtonWorking.setOnClickListener {
+            Toast.makeText(context, "Status Changed To Working", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.fragmentStatusButtonHelp.setOnClickListener {
+            Toast.makeText(context, "Status Changed To Help", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.fragmentStatusButtonDone.setOnClickListener {
+            Toast.makeText(context, "Status Changed To Done", Toast.LENGTH_SHORT).show()
+        }
+
+        return binding.root
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
