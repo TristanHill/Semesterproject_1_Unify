@@ -49,7 +49,7 @@ class QRCodeScannerActivity : AppCompatActivity() {
         resultsTextView.text = scannedData
 
         val userData = hashMapOf(
-            "status" to "done"
+            "status" to "Done"
         )
 
         val db = FirebaseFirestore.getInstance()

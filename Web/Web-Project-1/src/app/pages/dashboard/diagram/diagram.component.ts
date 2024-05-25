@@ -94,7 +94,7 @@ export class DiagramComponent implements OnInit, OnDestroy {
          } else {
             this.chartTitle = 'Participant Status';
           //  this.chartSubTitle = 'Vote Count';
-            this.chartData = [['Need Help', 0], ['In Progress', 0], ['done', 0]];
+            this.chartData = [['Need Help', 0], ['In Progress', 0], ['Done', 0]];
             this.chartBarColors = ['#F24A72', '#FDAF75', '#7AD67D'];
          }
 
