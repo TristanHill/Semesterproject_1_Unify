@@ -5,26 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
 import at.fhooe.sail.project.semesterproject1.databinding.ActivityQrscannerBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.journeyapps.barcodescanner.ScanContract
-import com.journeyapps.barcodescanner.ScanOptions
+import com.google.mlkit.vision.barcode.BarcodeScannerOptions
+import com.google.mlkit.vision.barcode.BarcodeScanning
+import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
+import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 
 class QRCodeScannerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQrscannerBinding
-    private val barcodeLauncher = registerForActivityResult(ScanContract()) { result ->
-        if (result.contents == null) {
-            Toast.makeText(this, "Scan canceled", Toast.LENGTH_LONG).show()
-        } else {
-            val scannedData = result.contents
-            Toast.makeText(this, "scanned: $scannedData", Toast.LENGTH_LONG).show()
-            val i:Intent= Intent(this, MainActivity::class.java)
-            startActivity(i)
-            createUser(scannedData)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +28,25 @@ class QRCodeScannerActivity : AppCompatActivity() {
     }
 
     private fun startScanning() {
-        val options = ScanOptions()
-        options.setPrompt("Scan a QR-Code")
-        options.setBeepEnabled(false)
-        options.setOrientationLocked(false)
-        barcodeLauncher.launch(options)
+        val options = GmsBarcodeScannerOptions.Builder()
+            .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+            .build()
+
+        val scanner = GmsBarcodeScanning.getClient(this, options)
+
+        scanner.startScan()
+            .addOnSuccessListener { barcode ->
+                val scannedData = barcode.rawValue ?: ""
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                createUser(scannedData)
+            }
+            .addOnCanceledListener {
+                Toast.makeText(this, "Scan abgebrochen", Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Scan fehlgeschlagen", e)
+            }
     }
 
     private fun createUser(scannedData: String) {
@@ -60,15 +65,20 @@ class QRCodeScannerActivity : AppCompatActivity() {
             .add(userData)
             .addOnSuccessListener { documentReference ->
                 Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
-                val intent = Intent().apply {
-                    putExtra("SessionId", scannedData)
-                    putExtra("UserId", documentReference.id)
+
+                // Store SessionID and UserID in SharedPreferences
+                val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
+                with(sharedPref.edit()) {
+                    putString("SessionID", scannedData)
+                    putString("UserID", documentReference.id)
+                    apply()
                 }
-                setResult(RESULT_OK, intent)
-                finish()
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
             }
+    }
+    companion object {
+        private const val TAG = "QRCodeScannerActivity"
     }
 }

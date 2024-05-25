@@ -10,4 +10,5 @@
     <string name="status_item">Status</string>
     <string name="question_item">Fragen</string>
     <string name="survey_item">Abstimmung</string>
+    <string name="scan_success">Scan erfolgreich!</string>
 </resources>
