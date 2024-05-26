@@ -15,4 +15,7 @@
     <string name="text_button_help">Ich benötige Hilfe!</string>
     <string name="text_button_done">Ich bin fertig!</string>
     <string name="text_status_description">Ändere deinen Status um zu zeigen wo du mit deiner Arbeit bist.</string>
+    <string name="text_question_description">Wenn du irgendwelche Fragen hast, stell sie hier!</string>
+    <string name="text_button_question_send">Frage abschicken</string>
+    <string name="text_hint_question_input">Deine Frage:</string>
 </resources>

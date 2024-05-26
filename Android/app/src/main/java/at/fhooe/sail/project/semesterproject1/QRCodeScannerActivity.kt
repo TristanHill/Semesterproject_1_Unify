@@ -35,9 +35,7 @@ class QRCodeScannerActivity : AppCompatActivity() {
         scanner.startScan()
             .addOnSuccessListener { barcode ->
                 val scannedData = barcode.rawValue ?: ""
-                val intent = Intent(this, MainActivity::class.java)
                 createUser(scannedData)
-                startActivity(intent)
             }
             .addOnCanceledListener {
                 Toast.makeText(this, "Scan abgebrochen", Toast.LENGTH_LONG).show()
@@ -63,17 +61,22 @@ class QRCodeScannerActivity : AppCompatActivity() {
                 Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
 
                 // Store SessionID and UserID in SharedPreferences
-                // TODO Send SessionID, UserID and user Name in the QR code and seperate them to put into shared preferences
+                // TODO Send SessionID, UserID and user Name in the QR code and separate them to put into shared preferences
                 val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
                 with(sharedPref.edit()) {
                     putString("SessionID", scannedData)
                     // putString("UserID", scannedData)
-                    // putString("SessionName, scannedData)
+                    // putString("SessionName", scannedData)
                     apply()
                 }
+
+                // Start MainActivity after user is created
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
+                Toast.makeText(this, "Fehler beim Erstellen des Benutzers", Toast.LENGTH_LONG).show()
             }
     }
 

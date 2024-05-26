@@ -1,23 +1,19 @@
 package at.fhooe.sail.project.semesterproject1
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment_question.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment_question : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -34,19 +30,26 @@ class Fragment_question : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_question, container, false)
+        val view = inflater.inflate(R.layout.fragment_question, container, false)
+
+        // Get references to the UI elements
+        val buttonSend = view.findViewById<Button>(R.id.fragment_status_button_working)
+        val textInputQuestion = view.findViewById<TextInputEditText>(R.id.fragment_question_text_input)
+
+        // Set an OnClickListener on the button
+        buttonSend.setOnClickListener {
+            val inputText = textInputQuestion.text.toString()
+            if (inputText.isNotEmpty()) {
+                Toast.makeText(requireContext(), inputText, Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Please enter a question", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        return view
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment fragment_question.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             Fragment_question().apply {
