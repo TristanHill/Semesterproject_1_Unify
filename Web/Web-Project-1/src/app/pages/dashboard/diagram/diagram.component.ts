@@ -108,7 +108,7 @@ export class DiagramComponent implements OnInit, OnDestroy {
                      return [key, value + 1];
                   }
 
-                  if (this.isSurvey && user.surveyOption != null && key === this.surveyOptions[user.surveyOption]) {
+                  if (this.isSurvey && user.surveyOption >= 0 && key === this.surveyOptions[user.surveyOption]) {
                      return [key, value + 1];
                   }
                   return [key, value];

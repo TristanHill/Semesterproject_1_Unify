@@ -1,10 +1,16 @@
 package at.fhooe.sail.project.semesterproject1
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,15 +24,17 @@ private const val ARG_PARAM2 = "param2"
  */
 class Fragment_question : Fragment() {
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    val db: FirebaseFirestore = Firebase.firestore
+    private var sessionId: String? = null
+    private var userId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            sessionId = it.getString("sessionId")
+            userId = it.getString("userId")
         }
+
     }
 
     override fun onCreateView(
@@ -35,6 +43,20 @@ class Fragment_question : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_question, container, false)
+    }
+
+    private fun addQuestion(questionText: String){
+        if(sessionId != null) {
+            db.collection("Session").document(sessionId!!)
+                .update("questionList", FieldValue.arrayUnion(hashMapOf(
+                    "text" to questionText
+                ))).addOnSuccessListener {
+                    Toast.makeText(activity,"Question submitted",Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener{
+                    Toast.makeText(activity,"Could not submit",Toast.LENGTH_SHORT).show()
+                }
+
+        }
     }
 
     companion object {

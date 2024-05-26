@@ -19,7 +19,7 @@ export class QuestionComponent {
     this.sessionService.getSessionRef()?.valueChanges().subscribe((session: any) => {
       console.log(session)
       this.questionList = session.questionList;
-
+      this.questionList.reverse();
     })
   }
 

@@ -6,7 +6,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import at.fhooe.sail.project.semesterproject1.databinding.ActivityQrscannerBinding
+import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -16,6 +18,7 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 class QRCodeScannerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQrscannerBinding
+    val db: FirebaseFirestore = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +40,6 @@ class QRCodeScannerActivity : AppCompatActivity() {
         scanner.startScan()
             .addOnSuccessListener { barcode ->
                 val scannedData = barcode.rawValue ?: ""
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
                 createUser(scannedData)
             }
             .addOnCanceledListener {
@@ -57,8 +58,6 @@ class QRCodeScannerActivity : AppCompatActivity() {
             "status" to "Done"
         )
 
-        val db = FirebaseFirestore.getInstance()
-
         db.collection("Session")
             .document(scannedData)
             .collection("User")
@@ -73,6 +72,10 @@ class QRCodeScannerActivity : AppCompatActivity() {
                     putString("UserID", documentReference.id)
                     apply()
                 }
+
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+
             }
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
