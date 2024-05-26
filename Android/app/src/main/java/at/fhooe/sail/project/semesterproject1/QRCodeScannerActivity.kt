@@ -51,8 +51,6 @@ class QRCodeScannerActivity : AppCompatActivity() {
     }
 
     private fun createUser(scannedData: String) {
-        val resultsTextView = binding.scanResults
-        resultsTextView.text = scannedData
 
         val userData = hashMapOf(
             "status" to "Done"
@@ -66,10 +64,12 @@ class QRCodeScannerActivity : AppCompatActivity() {
                 Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
 
                 // Store SessionID and UserID in SharedPreferences
+                // TODO Send SessionID, UserID and user Name in the QR code and seperate them to put into shared preferences
                 val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
                 with(sharedPref.edit()) {
                     putString("SessionID", scannedData)
-                    putString("UserID", documentReference.id)
+                    // putString("UserID", scannedData)
+                    // putString("SessionName, scannedData)
                     apply()
                 }
 
@@ -81,6 +81,7 @@ class QRCodeScannerActivity : AppCompatActivity() {
                 Log.w(TAG, "Error adding document", e)
             }
     }
+
     companion object {
         private const val TAG = "QRCodeScannerActivity"
     }

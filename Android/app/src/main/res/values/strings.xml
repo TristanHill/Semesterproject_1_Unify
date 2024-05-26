@@ -13,4 +13,9 @@
     <string name="text_button_scan_qr_code">Scan QR Code</string>
     <string name="text_scan_result">Scan Results Appear Here</string>
     <string name="scan_success">Scan Successful!</string>
+    <string name="text_button_working">I Am Working!</string>
+    <string name="text_button_help">I Need Some Help!</string>
+    <string name="text_button_done">I Am Done!</string>
+    <string name="text_status_description">Change Your Status To Reflect Where You Are With Your Workload</string>
+
 </resources>

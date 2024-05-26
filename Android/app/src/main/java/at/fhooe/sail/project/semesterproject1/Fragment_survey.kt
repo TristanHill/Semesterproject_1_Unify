@@ -46,7 +46,7 @@ class Fragment_survey : Fragment() {
                     if (snapshot != null && snapshot.exists()) {
                         survey = snapshot.data?.get("survey")
                         Log.d("Firestore", survey.toString())
-                        
+
                         if(survey == null){
                             updateUserSurveyOption(-1)
                         }

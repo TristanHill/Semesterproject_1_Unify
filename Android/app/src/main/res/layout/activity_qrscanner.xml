@@ -18,18 +18,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/scan_results"
-        android:layout_width="0dp"
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="45dp"
-        android:text="Scanergebnisse erscheinen hier"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/activity_scanQR_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/camera_icon" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
