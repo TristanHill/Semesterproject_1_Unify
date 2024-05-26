@@ -94,7 +94,7 @@ export class DiagramComponent implements OnInit, OnDestroy {
          } else {
             this.chartTitle = 'Participant Status';
           //  this.chartSubTitle = 'Vote Count';
-            this.chartData = [['Need Help', 0], ['In Progress', 0], ['done', 0]];
+            this.chartData = [['Need Help', 0], ['In Progress', 0], ['Done', 0]];
             this.chartBarColors = ['#F24A72', '#FDAF75', '#7AD67D'];
          }
 
@@ -108,7 +108,7 @@ export class DiagramComponent implements OnInit, OnDestroy {
                      return [key, value + 1];
                   }
 
-                  if (this.isSurvey && user.surveyOption != null && key === this.surveyOptions[user.surveyOption]) {
+                  if (this.isSurvey && user.surveyOption >= 0 && key === this.surveyOptions[user.surveyOption]) {
                      return [key, value + 1];
                   }
                   return [key, value];

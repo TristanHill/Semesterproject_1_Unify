@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -16,47 +17,54 @@ private const val ARG_PARAM2 = "param2"
 class Fragment_question : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
+    // TODO: Rename and change types of parameters
+    val db: FirebaseFirestore = Firebase.firestore
+    private var sessionId: String? = null
+    private var userId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            sessionId = it.getString("sessionId")
+            userId = it.getString("userId")
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_question, container, false)
+        return inflater.inflate(R.layout.fragment_question, container, false)
+    }
 
-        // Get references to the UI elements
-        val buttonSend = view.findViewById<Button>(R.id.fragment_status_button_working)
-        val textInputQuestion = view.findViewById<TextInputEditText>(R.id.fragment_question_text_input)
-
-        // Set an OnClickListener on the button
-        buttonSend.setOnClickListener {
-            val inputText = textInputQuestion.text.toString()
-            if (inputText.isNotEmpty()) {
-                Toast.makeText(requireContext(), inputText, Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), "Please enter a question", Toast.LENGTH_SHORT).show()
-            }
+    private fun addQuestion(questionText: String) {
+        if (sessionId != null) {
+            db.collection("Session")
+                    .document(sessionId!!)
+                    .update(
+                            "questionList",
+                            FieldValue.arrayUnion(hashMapOf("text" to questionText))
+                    )
+                    .addOnSuccessListener {
+                        Toast.makeText(activity, "Question submitted", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(activity, "Could not submit", Toast.LENGTH_SHORT).show()
+                    }
         }
-
-        return view
     }
 
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment_question().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                Fragment_question().apply {
+                    arguments =
+                            Bundle().apply {
+                                putString(ARG_PARAM1, param1)
+                                putString(ARG_PARAM2, param2)
+                            }
                 }
-            }
     }
 }
