@@ -46,6 +46,8 @@ class Fragment_status : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentStatusBinding.inflate(inflater, container, false)
 
+        binding.fragmentStatusTvCurrent.text = "Current Status: Unknown"
+
         //TODO Send String to firebase when button is clicked
         binding.fragmentStatusButtonWorking.setOnClickListener {
             Toast.makeText(context, "Status Changed To Working", Toast.LENGTH_SHORT).show()
