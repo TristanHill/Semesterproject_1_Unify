@@ -82,7 +82,6 @@ class MainActivity : AppCompatActivity() {
         val leaveButton = findViewById<ImageView>(R.id.toolbar_leave_session)
         leaveButton.setOnClickListener{
             deleteUser()
-            finish()
         }
     }
 
@@ -114,6 +113,7 @@ class MainActivity : AppCompatActivity() {
                         remove("UserID")
                         apply()
                     }
+                    finish()
                 }
                 .addOnFailureListener { e -> Log.w(TAG, "Error deleting user", e) }
         }
