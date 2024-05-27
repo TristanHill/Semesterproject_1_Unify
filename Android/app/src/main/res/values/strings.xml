@@ -17,5 +17,8 @@
     <string name="text_button_help">I Need Some Help!</string>
     <string name="text_button_done">I Am Done!</string>
     <string name="text_status_description">Change Your Status To Reflect Where You Are With Your Workload</string>
+    <string name="text_question_description">If You Have Any Questions, Ask Them Here.</string>
+    <string name="text_button_question_send">Send Question</string>
+    <string name="text_hint_question_input">Your Question:</string>
 
 </resources>

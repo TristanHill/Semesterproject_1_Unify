@@ -19,14 +19,12 @@
             android:id="@+id/fragment_status_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="60dp"
             android:fontFamily="@font/helvetica_neue_black"
             android:text="Status Check"
             android:textColor="@color/white"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/fragment_status_description"
+            tools:layout_editor_absoluteY="60dp" />
 
         <Button
             android:id="@+id/fragment_status_button_working"
@@ -35,6 +33,9 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="150dp"
             android:layout_marginEnd="50dp"
+            android:backgroundTint="#FF9800"
+            android:backgroundTintMode="add"
+            android:hapticFeedbackEnabled="false"
             android:text="@string/text_button_working"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +46,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
+            android:backgroundTint="@color/red"
+            android:backgroundTintMode="add"
             android:text="@string/text_button_help"
             app:layout_constraintEnd_toEndOf="@+id/fragment_status_button_working"
             app:layout_constraintStart_toStartOf="@+id/fragment_status_button_working"
@@ -55,7 +58,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
+            android:layout_marginBottom="137dp"
+            android:backgroundTint="@color/button_green"
+            android:backgroundTintMode="add"
             android:text="@string/text_button_done"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/fragment_status_button_help"
             app:layout_constraintStart_toStartOf="@+id/fragment_status_button_help"
             app:layout_constraintTop_toBottomOf="@+id/fragment_status_button_help" />
@@ -64,13 +71,12 @@
             android:id="@+id/fragment_status_description"
             android:layout_width="360dp"
             android:layout_height="66dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/text_status_description"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/fragment_status_header"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_status_button_working"
+            app:layout_constraintStart_toStartOf="@+id/fragment_status_button_working"
             app:layout_constraintTop_toBottomOf="@+id/fragment_status_header" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
