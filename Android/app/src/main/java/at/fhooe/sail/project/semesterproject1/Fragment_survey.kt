@@ -49,6 +49,7 @@ class Fragment_survey : Fragment() {
 
                         if(survey == null){
                             updateUserSurveyOption(-1)
+                            //vll dann auf anderes fragment, ds anzeigt: "No survey atm", verweisen
                         }
                     } else {
                         Log.d("Firestore", "Document has been deleted!")

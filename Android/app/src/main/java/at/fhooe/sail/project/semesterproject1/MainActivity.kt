@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        replaceFragment(Fragment_question())
+        replaceFragment(Fragment_status())
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){

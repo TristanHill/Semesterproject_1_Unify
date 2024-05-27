@@ -48,15 +48,16 @@ class Fragment_status : Fragment() {
 
         //TODO Send String to firebase when button is clicked
         binding.fragmentStatusButtonWorking.setOnClickListener {
-            Toast.makeText(context, "Status Changed To Working", Toast.LENGTH_SHORT).show()
+            updateUserStatus("In Progress")
+
         }
 
         binding.fragmentStatusButtonHelp.setOnClickListener {
-            Toast.makeText(context, "Status Changed To Help", Toast.LENGTH_SHORT).show()
+            updateUserStatus("Need Help")
         }
 
         binding.fragmentStatusButtonDone.setOnClickListener {
-            Toast.makeText(context, "Status Changed To Done", Toast.LENGTH_SHORT).show()
+            updateUserStatus("Done")
         }
 
         return binding.root
@@ -71,9 +72,9 @@ class Fragment_status : Fragment() {
             db.collection("Session").document(sessionId!!).collection("User").document(userId!!)
                 .update("status",status)
                 .addOnSuccessListener {
-
+                    Toast.makeText(context, "Status Changed To ${status}", Toast.LENGTH_SHORT).show()
                 }.addOnFailureListener{
-
+                    Toast.makeText(context, "failed to set status", Toast.LENGTH_SHORT).show()
                 }
         }
     }

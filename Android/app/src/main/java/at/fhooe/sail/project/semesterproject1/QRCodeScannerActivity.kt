@@ -60,8 +60,7 @@ class QRCodeScannerActivity : AppCompatActivity() {
                     val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
                     with(sharedPref.edit()) {
                         putString("SessionID", scannedData)
-                        // putString("UserID", scannedData)
-                        // putString("SessionName, scannedData)
+                        putString("UserID", documentReference.id)
                         apply()
                     }
 

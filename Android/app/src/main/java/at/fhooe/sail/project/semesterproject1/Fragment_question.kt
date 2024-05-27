@@ -28,6 +28,8 @@ class Fragment_question : Fragment() {
             sessionId = it.getString("sessionId")
             userId = it.getString("userId")
         }
+
+        //add onClickLIstener and send question to firebase
     }
 
     override fun onCreateView(
