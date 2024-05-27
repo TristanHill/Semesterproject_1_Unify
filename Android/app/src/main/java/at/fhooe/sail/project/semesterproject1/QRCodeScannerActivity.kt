@@ -53,14 +53,12 @@ class QRCodeScannerActivity : AppCompatActivity() {
                 .add(userData)
                 .addOnSuccessListener { documentReference ->
                     Log.d(TAG, "DocumentSnapshot written with ID: ${documentReference.id}")
-
-                    // Store SessionID and UserID in SharedPreferences
-                    // TODO Send SessionID, UserID and user Name in the QR code and seperate them to
-                    // put into shared preferences
+                    
                     val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
                     with(sharedPref.edit()) {
                         putString("SessionID", scannedData)
                         putString("UserID", documentReference.id)
+
                         apply()
                     }
 
