@@ -1,95 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_darkblue"
+    android:orientation="vertical"
     tools:context=".Fragment_status">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/fragment_status_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/helvetica_neue_black"
+        android:text="Status Check"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
 
+    <TextView
+        android:id="@+id/fragment_status_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/text_status_description"
+        android:textColor="@color/white" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="32dp">
 
-        <TextView
-            android:id="@+id/fragment_status_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/helvetica_neue_black"
-            android:text="Status Check"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/fragment_status_description"
-            tools:layout_editor_absoluteY="60dp" />
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_status_button_working"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="50dp"
-            android:backgroundTint="#FF9800"
-            android:backgroundTintMode="add"
+            android:layout_width="wrap_content"
+            android:layout_height="125dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/fragment_status_button_normal"
+            android:foreground="@android:color/transparent"
             android:hapticFeedbackEnabled="false"
             android:text="@string/text_button_working"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_status_header" />
+            android:textAllCaps="false"
+            android:textColor="@color/background_darkblue" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_status_button_help"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:backgroundTint="@color/red"
-            android:backgroundTintMode="add"
-            android:text="@string/text_button_help"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_status_button_working"
-            app:layout_constraintStart_toStartOf="@+id/fragment_status_button_working"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_status_button_working" />
-
-        <Button
-            android:id="@+id/fragment_status_button_done"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="137dp"
-            android:backgroundTint="@color/button_green"
-            android:backgroundTintMode="add"
-            android:text="@string/text_button_done"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_status_button_help"
-            app:layout_constraintStart_toStartOf="@+id/fragment_status_button_help"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_status_button_help" />
-
-        <TextView
-            android:id="@+id/fragment_status_description"
-            android:layout_width="360dp"
-            android:layout_height="66dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/text_status_description"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_status_button_working"
-            app:layout_constraintStart_toStartOf="@+id/fragment_status_button_working"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_status_header" />
-
-        <TextView
-            android:id="@+id/fragment_status_tv_current"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/helvetica_neue_black"
-            android:text="Current Status:"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/fragment_status_description"
-            tools:layout_editor_absoluteY="167dp" />
+            android:layout_height="125dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/fragment_status_button_normal"
+            android:foreground="@android:color/transparent"
+            android:hapticFeedbackEnabled="false"
+            android:text="@string/text_button_help"
+            android:textAllCaps="false"
+            android:textColor="@color/background_darkblue" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_status_button_done"
+            android:layout_width="wrap_content"
+            android:layout_height="125dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/fragment_status_button_normal"
+            android:foreground="@android:color/transparent"
+            android:hapticFeedbackEnabled="false"
+            android:text="@string/text_button_done"
+            android:textAllCaps="false"
+            android:textColor="@color/background_darkblue" />
 
+    </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>
