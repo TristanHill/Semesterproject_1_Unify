@@ -18,4 +18,5 @@
     <string name="text_question_description">Wenn du irgendwelche Fragen hast, stell sie hier!</string>
     <string name="text_button_question_send">Frage abschicken</string>
     <string name="text_hint_question_input">Deine Frage:</string>
+    <string name="fragment_survey_header">momentan keine Umfrage</string>
 </resources>

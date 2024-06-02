@@ -20,5 +20,8 @@
     <string name="text_question_description">If You Have Any Questions, Ask Them Here.</string>
     <string name="text_button_question_send">Send Question</string>
     <string name="text_hint_question_input">Your Question:</string>
+    <string name="status_fragment_header" translatable="false">Status Check</string>
+    <string name="question_fragment_header" translatable="false">Quick Question</string>
+    <string name="fragment_survey_header">No survey at the moment</string>
 
 </resources>

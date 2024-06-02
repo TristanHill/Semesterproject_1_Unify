@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import at.fhooe.sail.project.semesterproject1.databinding.FragmentQuestionBinding
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,6 +24,7 @@ class Fragment_question : Fragment() {
     private var userId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         arguments?.let {
             sessionId = it.getString("sessionId")
@@ -30,6 +32,7 @@ class Fragment_question : Fragment() {
         }
 
         //add onClickLIstener and send question to firebase
+
     }
 
     override fun onCreateView(
@@ -38,7 +41,13 @@ class Fragment_question : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_question, container, false)
+        val binding = FragmentQuestionBinding.inflate(layoutInflater)
+        binding.fragmentQuestionButtonSend.setOnClickListener {
+           if(binding.fragmentQuestionTextInput.editText != null) {
+               addQuestion(binding.fragmentQuestionTextInput.editText?.text.toString())
+           }
+        }
+        return binding.root
     }
 
     private fun addQuestion(questionText: String) {

@@ -1,17 +1,11 @@
 package at.fhooe.sail.project.semesterproject1
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import at.fhooe.sail.android.lists.a.OptionsAdapter
-import at.fhooe.sail.project.semesterproject1.databinding.FragmentSurveyBinding
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
@@ -26,16 +20,13 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment_survey.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment_survey : Fragment() {
+class Fragment_nosurvey : Fragment() {
     // TODO: Rename and change types of parameters
-
-    var _binding: FragmentSurveyBinding? = null
-    val binding: FragmentSurveyBinding
-        get() = _binding!!
     val db: FirebaseFirestore = Firebase.firestore
     private var sessionId: String? = null
     private var userId: String? = null
-    private var survey: Survey? = null
+
+    private var survey: Any? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,12 +44,13 @@ class Fragment_survey : Fragment() {
                     }
 
                     if (snapshot != null && snapshot.exists()) {
-                        val surveyHashMap = snapshot.data?.get("survey") as HashMap<String, Any>?
-                        if(surveyHashMap != null){
-                            survey =  Survey(surveyHashMap["surveyTitle"].toString(), surveyHashMap["surveyOptions"] as ArrayList<String>)
-                            Log.d(TAG, survey.toString())
-                        }
+                        survey = snapshot.data?.get("survey")
+                        Log.d("Firestore", survey.toString())
 
+                        if(survey == null){
+                            updateUserSurveyOption(-1)
+                            //vll dann auf anderes fragment, ds anzeigt: "No survey atm", verweisen
+                        }
                     } else {
                         Log.d("Firestore", "Document has been deleted!")
                     }
@@ -70,30 +62,11 @@ class Fragment_survey : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSurveyBinding.inflate(inflater)
-
-        val data: MutableList<Option> = mutableListOf(
-            Option("Option 1"),
-            Option("Option 2")
-        )
-
-        for(index in 3  ..5){
-            data.add(Option("Option $index"))
-        }
-
-        /*      if(survey != null){
-                  for(index in 0  ..survey!!.surveyOptions.size){
-                      data.add(Option(survey!!.surveyOptions[index]))
-                  }
-              } */
-
-
-        val recycler: RecyclerView = binding.fragmentSurveyRecyclerView
-        recycler.adapter = OptionsAdapter(data)
-        return binding.root
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_nosurvey, container, false)
     }
 
-    public fun updateUserSurveyOption(optionIndex: Int?){
+    private fun updateUserSurveyOption(optionIndex: Int?){
         if(sessionId != null && userId != null){
             db.collection("Session").document(sessionId!!).collection("User").document(userId!!)
                 .update("surveyOption",optionIndex)
