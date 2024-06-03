@@ -13,7 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import android.widget.Button
 import android.widget.Toast
-import at.fhooe.sail.project.semesterproject1.databinding.FragmentStatusBinding
+
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,6 +37,7 @@ class Fragment_status : Fragment() {
         arguments?.let {
             sessionId = it.getString("sessionId")
             userId = it.getString("userId")
+
         }
     }
 
@@ -58,23 +59,22 @@ class Fragment_status : Fragment() {
         val drawableHelpPressed = R.drawable.fragment_status_button_pressed_help
         val drawableDonePressed = R.drawable.fragment_status_button_pressed_done
 
-        //TODO Send String to firebase when button is clicked
+        changeButtonColor(this@Fragment_status, fragmentStatusButtonWorking, drawableWorkingPressed)
+
+
         fragmentStatusButtonWorking.setOnClickListener {
-            showToast("Status Changed To Working")
             changeButtonColor(this@Fragment_status, fragmentStatusButtonWorking, drawableWorkingPressed)
             resetOtherButtons(fragmentStatusButtonWorking, fragmentStatusButtonHelp, fragmentStatusButtonDone)
-            updateUserStatus("Working")
+            updateUserStatus("In Progress")
         }
 
         fragmentStatusButtonHelp.setOnClickListener {
-            showToast("Status Changed To Help")
             changeButtonColor(this@Fragment_status, fragmentStatusButtonHelp, drawableHelpPressed)
             resetOtherButtons(fragmentStatusButtonHelp, fragmentStatusButtonWorking, fragmentStatusButtonDone)
-            updateUserStatus("Help")
+            updateUserStatus("Need Help")
         }
 
         fragmentStatusButtonDone.setOnClickListener {
-            showToast("Status Changed To Done")
             changeButtonColor(this@Fragment_status, fragmentStatusButtonDone, drawableDonePressed)
             resetOtherButtons(fragmentStatusButtonDone, fragmentStatusButtonWorking, fragmentStatusButtonHelp)
             updateUserStatus("Done")

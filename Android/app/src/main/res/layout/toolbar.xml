@@ -17,24 +17,25 @@
             android:id="@+id/toolbar_session_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Test Name Session"
-            android:textSize="30dp"
-            android:textColor="@color/fontBlue"
             android:layout_centerVertical="true"
-            ></TextView>
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/inter_semi_bold"
+            android:text="Test Name Session"
+            android:textColor="@color/fontBlue"
+            android:textSize="24sp"></TextView>
 
 
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/toolbar_leave_session"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/leave_icon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="24dp"
         android:layout_marginRight="8sp"
-        android:layout_alignParentEnd="true"/>
+        app:srcCompat="@drawable/leave_icon" />
 
 
 </RelativeLayout>

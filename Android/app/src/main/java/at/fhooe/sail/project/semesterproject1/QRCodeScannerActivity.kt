@@ -45,7 +45,7 @@ class QRCodeScannerActivity : AppCompatActivity() {
 
     private fun createUser(scannedData: String) {
 
-        val userData = hashMapOf("status" to "Done")
+        val userData = hashMapOf("status" to "In Progress")
 
         db.collection("Session")
                 .document(scannedData)
