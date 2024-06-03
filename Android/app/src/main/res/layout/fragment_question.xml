@@ -12,17 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_question_button_send"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="137dp"
-            android:backgroundTint="@color/button_green"
-            android:backgroundTintMode="add"
-            android:hapticFeedbackEnabled="false"
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginBottom="105dp"
+            android:background="@drawable/join_session_button"
+            android:fontFamily="@font/inter_semi_bold"
+            android:letterSpacing="0.05"
             android:text="@string/text_button_question_send"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -31,30 +32,31 @@
             android:id="@+id/fragment_question_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginBottom="8dp"
             android:fontFamily="@font/helvetica_neue_black"
-            android:text="@string/status_fragment_header"
+            android:text="@string/question_fragment_header"
             android:textColor="@color/white"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/fragment_question_description"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/fragment_question_description"
+            app:layout_constraintStart_toStartOf="@+id/fragment_question_description" />
 
         <TextView
             android:id="@+id/fragment_question_description"
-            android:layout_width="360dp"
+            android:layout_width="0dp"
             android:layout_height="66dp"
-            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/text_status_description"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_question_button_send"
-            app:layout_constraintStart_toStartOf="@+id/fragment_question_button_send"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_question_header" />
+            app:layout_constraintEnd_toEndOf="@+id/fragment_question_text_input"
+            app:layout_constraintStart_toStartOf="@+id/fragment_question_text_input"
+            tools:layout_editor_absoluteY="107dp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fragment_question_text_input"
             android:layout_width="319dp"
             android:layout_height="62dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
             android:layout_marginBottom="100dp"
             app:layout_constraintBottom_toTopOf="@+id/fragment_question_button_send"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +67,6 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/text_hint_question_input"
                 android:textColor="#FFFFFF" />
         </com.google.android.material.textfield.TextInputLayout>
 

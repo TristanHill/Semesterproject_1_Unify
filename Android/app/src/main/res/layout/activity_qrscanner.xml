@@ -6,14 +6,18 @@
     android:layout_height="match_parent"
     android:background="@color/background_darkblue">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/activity_scanQR_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="75dp"
         android:layout_marginRight="75dp"
         android:layout_marginBottom="105dp"
+        android:background="@drawable/join_session_button"
+        android:fontFamily="@font/inter_semi_bold"
+        android:letterSpacing="0.05"
         android:text="@string/text_button_scan_qr_code"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

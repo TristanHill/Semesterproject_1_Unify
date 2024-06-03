@@ -92,7 +92,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){

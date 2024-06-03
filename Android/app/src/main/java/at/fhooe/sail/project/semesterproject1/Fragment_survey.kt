@@ -29,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-class Fragment_survey : Fragment() {
+class Fragment_survey : Fragment(),     OnItemClickListener {
     // TODO: Rename and change types of parameters
     private lateinit var adapter: OptionsAdapter
     private  lateinit var recyclerView: RecyclerView
@@ -73,30 +73,30 @@ class Fragment_survey : Fragment() {
         }
     }
 
-    OnItemClickListener {
-        // Other fragment code...
-
-        override fun onItemClick(position: Int) {
-            // Handle the click event and position here
-            Toast.makeText(context, "Clicked item position: $position", Toast.LENGTH_SHORT).show()
-        }
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        this
         _binding = FragmentSurveyBinding.inflate(inflater)
         return binding.root
     }
 
+    override fun onItemClick(position: Int) {
+        // Handle the click event and position here
+        updateUserSurveyOption(position)
+        Toast.makeText(context, "Clicked item position: $position", Toast.LENGTH_SHORT).show()
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataInitialize()
         val layoutManager = LinearLayoutManager(context)
         recyclerView = view.findViewById(R.id.fragment_survey_recycler_view)
         val recycler: RecyclerView = binding.fragmentSurveyRecyclerView
-        recycler.adapter = OptionsAdapter(optionList)
-        recycler.layoutManager = GridLayoutManager(context,1)
+        adapter = OptionsAdapter(optionList,  this)
+        recycler.adapter = adapter
+            recycler.layoutManager = GridLayoutManager(context,1)
         recycler.addItemDecoration(object: RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
@@ -139,7 +139,7 @@ class Fragment_survey : Fragment() {
             val layoutManager = LinearLayoutManager(context)
             recyclerView = binding.fragmentSurveyRecyclerView
             val recycler: RecyclerView = binding.fragmentSurveyRecyclerView
-            recycler.adapter = OptionsAdapter(optionList)
+            recycler.adapter = OptionsAdapter(optionList, this)
             recycler.layoutManager = GridLayoutManager(context,1)
             recycler.addItemDecoration(object: RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(

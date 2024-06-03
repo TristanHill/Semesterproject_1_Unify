@@ -10,63 +10,61 @@
 
     <!-- TextView with layout_marginBottom -->
 
-    <TextView
-        android:id="@+id/activity_join_session_tv_unify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="200dp"
-        android:fontFamily="@font/monofett"
-        android:gravity="top"
-        android:text="@string/text_unify"
-        android:textAppearance="@style/unify"
-        android:textSize="70sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.282"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/activity_join_session_tv_letsStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/helvetica_neue_bold"
-        android:gravity="top"
-        android:text="@string/text_lets_start"
-        android:textAppearance="@style/lets_start"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="@+id/activity_join_session_tv_unify"
-        app:layout_constraintTop_toBottomOf="@+id/activity_join_session_tv_unify" />
-
-    <TextView
-        android:id="@+id/activity_join_session_tv_intro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:fontFamily="@font/helvetica_neue_medium"
-        android:gravity="top"
-        android:text="@string/text_intro"
-        android:textAppearance="@style/intro"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/activity_join_session_tv_letsStart"
-        app:layout_constraintTop_toBottomOf="@+id/activity_join_session_tv_letsStart" />
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/activity_join_session_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="75dp"
         android:layout_marginRight="75dp"
         android:layout_marginBottom="105dp"
+        android:background="@drawable/join_session_button"
+        android:fontFamily="@font/inter_semi_bold"
         android:hapticFeedbackEnabled="false"
+        android:letterSpacing="0.05"
         android:text="@string/text_button_join_session"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="314dp"
+        android:layout_height="234dp"
+        android:layout_marginTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/unify_icon" />
+
+    <TextView
+        android:id="@+id/activity_join_session_tv_letsStart"
+        style="@style/lets_start"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/helvetica_neue_bold"
+        android:letterSpacing="0.025"
+        android:text="@string/text_lets_start"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/activity_join_session_text_intro"
+        style="@style/intro"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/helvetica_neue_medium"
+        android:letterSpacing="0.05"
+        android:text="@string/text_intro"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/activity_join_session_tv_letsStart"
+        app:layout_constraintStart_toStartOf="@+id/activity_join_session_tv_letsStart"
+        app:layout_constraintTop_toBottomOf="@+id/activity_join_session_tv_letsStart" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

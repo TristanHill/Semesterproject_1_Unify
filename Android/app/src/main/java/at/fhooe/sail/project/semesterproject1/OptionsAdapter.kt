@@ -4,12 +4,12 @@ import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import at.fhooe.sail.project.semesterproject1.Option
 import at.fhooe.sail.project.semesterproject1.R
+import at.fhooe.sail.project.semesterproject1.OnItemClickListener
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
@@ -17,7 +17,7 @@ import com.google.firebase.firestore.firestore
 
 class OptionsAdapter(val mData: List<Option>,val listener: OnItemClickListener) : RecyclerView.Adapter<OptionsAdapter.OptionHolder>(){
 
-    inner class OptionHolder(val root: View): RecyclerView.ViewHolder(root){
+    inner class OptionHolder(val root: View): RecyclerView.ViewHolder(root), View.OnClickListener{
         var mContent: TextView
         val db: FirebaseFirestore = Firebase.firestore
         private lateinit var sharedPref: SharedPreferences
@@ -26,10 +26,15 @@ class OptionsAdapter(val mData: List<Option>,val listener: OnItemClickListener) 
         init {
             mContent = root.findViewById(R.id.fragment_survey_option_tv) as TextView
 
-            root.setOnClickListener {
-                listener.setOnItemClick(adapterPosition)
-            }
+            root.setOnClickListener(this)
 
+        }
+
+        override fun onClick(v: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(position)
+            }
         }
 
     }

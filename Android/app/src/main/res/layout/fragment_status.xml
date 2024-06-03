@@ -13,7 +13,8 @@
         android:id="@+id/fragment_status_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_horizontal|left"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="60dp"
         android:fontFamily="@font/helvetica_neue_black"
         android:text="Status Check"
@@ -22,9 +23,10 @@
 
     <TextView
         android:id="@+id/fragment_status_description"
-        android:layout_width="wrap_content"
+        android:layout_width="303dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="left"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/text_status_description"
