@@ -23,5 +23,6 @@
     <string name="status_fragment_header" translatable="false">Status Check</string>
     <string name="question_fragment_header" translatable="false">Quick Question</string>
     <string name="fragment_survey_header">No survey at the moment</string>
+    <string name="fragment_survey_submit_button">Submit</string>
 
 </resources>

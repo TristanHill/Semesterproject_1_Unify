@@ -11,6 +11,8 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 
+
+var selected = -1
 class OptionHolder(val root: View): RecyclerView.ViewHolder(root) {
     var mContent: TextView
     val db: FirebaseFirestore = Firebase.firestore
@@ -22,8 +24,8 @@ class OptionHolder(val root: View): RecyclerView.ViewHolder(root) {
 
         root.setOnClickListener {
             //send answer to firebase
-         /*   db.collection("Session").document(sessionID!!).collection("User").document(userID!!)
-                .update("surveyOption", adapterPosition) */
+           db.collection("Session").document(sessionID!!).collection("User").document(userID!!)
+                .update("surveyOption", adapterPosition)
             Toast.makeText(root.context, "Option (${mContent.text.toString()}) ausgewählt", Toast.LENGTH_SHORT).show()
         }
 

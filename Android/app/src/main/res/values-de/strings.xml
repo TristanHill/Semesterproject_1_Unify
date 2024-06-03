@@ -19,4 +19,5 @@
     <string name="text_button_question_send">Frage abschicken</string>
     <string name="text_hint_question_input">Deine Frage:</string>
     <string name="fragment_survey_header">momentan keine Umfrage</string>
+    <string name="fragment_survey_submit_button">Senden</string>
 </resources>

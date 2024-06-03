@@ -5,7 +5,9 @@
         android:id="@+id/status_item"
         android:title="@string/status_item"
         android:icon="@drawable/status_icon"
-        android:tint="@color/fontBlue"/>
+        android:tint="@color/fontBlue"
+        android:iconTint="@color/fontBlue"
+        />
     <item
         android:id="@+id/question_item"
         android:title="@string/question_item"
