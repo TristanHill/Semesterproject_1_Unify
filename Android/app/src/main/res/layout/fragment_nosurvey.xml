@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="@font/inter_black"
+        android:fontFamily="@font/helvetica_neue_medium"
         android:letterSpacing="0.025"
         android:text="@string/fragment_survey_header"
         android:textColor="@color/white"

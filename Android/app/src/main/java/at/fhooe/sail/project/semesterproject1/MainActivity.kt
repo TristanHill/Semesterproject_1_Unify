@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
@@ -14,13 +16,21 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import at.fhooe.sail.project.semesterproject1.databinding.ActivityMainBinding
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
@@ -47,7 +57,37 @@ class MainActivity : AppCompatActivity() {
 
         replaceFragment(Fragment_status())
         setNavigationView()
+/*
+       val  navView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout) as NavHostFragment
+        val navController: NavController = navHostFragment.navController
 
+        navView.setupWithNavController(navController)
+
+// Farben programmatisch setzen
+       // Colors for each item in the BottomNavigationView
+val activeColors = intArrayOf(
+    ContextCompat.getColor(this, R.color.bottom_nav_color_active_status),
+    ContextCompat.getColor(this, R.color.bottom_nav_color_active_question),
+    ContextCompat.getColor(this, R.color.bottom_nav_color_active_survey)
+)
+
+val inactiveColor = ContextCompat.getColor(this, R.color.bottom_nav_color_inactive)
+
+// Assign individual colors to each menu item
+        navView.menu.forEachIndexed { index, item ->
+            val icon = item.icon
+            if (icon != null) {
+                val color = if (index < activeColors.size) {
+                    activeColors[index]
+                } else {
+                    inactiveColor
+                }
+                DrawableCompat.setTint(icon, color)
+            }
+        }
+
+*/
         val sessionName =findViewById<TextView>(R.id.toolbar_session_name)
         if(sessionID != null){
             db.collection("Session").document(sessionID)

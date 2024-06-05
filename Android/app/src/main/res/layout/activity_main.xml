@@ -25,7 +25,11 @@
         app:labelVisibilityMode="unlabeled"
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconSize="50sp"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/bottom_nav_color_selector"
+        app:itemBackground="@color/white"
         app:backgroundTint="@color/white"
+        app:itemActiveIndicatorStyle="@color/white"
         >
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

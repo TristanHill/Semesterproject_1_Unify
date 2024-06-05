@@ -10,5 +10,8 @@
 
     <color name="button_green">#2AD351</color>
     <color name="background_darkblue">#141E46</color>
-
+    <color name="bottom_nav_color_active_status">@color/red</color>
+    <color name="bottom_nav_color_active_question">@color/green</color>
+    <color name="bottom_nav_color_active_survey">@color/orange</color>
+    <color name="bottom_nav_color_inactive">@color/fontBlue</color>
 </resources>

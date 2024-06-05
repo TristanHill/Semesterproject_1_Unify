@@ -41,14 +41,14 @@
         android:id="@+id/activity_join_session_tv_letsStart"
         style="@style/lets_start"
         android:layout_width="0dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/helvetica_neue_bold"
         android:letterSpacing="0.025"
         android:text="@string/text_lets_start"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
