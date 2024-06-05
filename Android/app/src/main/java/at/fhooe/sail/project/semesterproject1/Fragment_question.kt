@@ -45,6 +45,7 @@ class Fragment_question : Fragment() {
         binding.fragmentQuestionButtonSend.setOnClickListener {
            if(binding.fragmentQuestionTextInput.editText != null) {
                addQuestion(binding.fragmentQuestionTextInput.editText?.text.toString())
+               binding.fragmentQuestionTextInput.editText!!.setText("")
            }
         }
         return binding.root
