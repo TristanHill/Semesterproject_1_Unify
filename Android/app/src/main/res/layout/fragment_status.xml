@@ -28,9 +28,10 @@
         android:layout_gravity="left"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@font/inter_bold"
         android:text="@string/text_status_description"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,11 +46,13 @@
             android:layout_height="125dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/fragment_status_button_normal"
+            android:fontFamily="@font/inter_semi_bold"
             android:foreground="@android:color/transparent"
             android:hapticFeedbackEnabled="false"
             android:text="@string/text_button_working"
             android:textAllCaps="false"
-            android:textColor="@color/background_darkblue" />
+            android:textColor="@color/background_darkblue"
+            android:textSize="24sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_status_button_help"
@@ -57,11 +60,13 @@
             android:layout_height="125dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/fragment_status_button_normal"
+            android:fontFamily="@font/inter_semi_bold"
             android:foreground="@android:color/transparent"
             android:hapticFeedbackEnabled="false"
             android:text="@string/text_button_help"
             android:textAllCaps="false"
-            android:textColor="@color/background_darkblue" />
+            android:textColor="@color/background_darkblue"
+            android:textSize="24sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/fragment_status_button_done"
@@ -69,11 +74,13 @@
             android:layout_height="125dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/fragment_status_button_normal"
+            android:fontFamily="@font/inter_semi_bold"
             android:foreground="@android:color/transparent"
             android:hapticFeedbackEnabled="false"
             android:text="@string/text_button_done"
             android:textAllCaps="false"
-            android:textColor="@color/background_darkblue" />
+            android:textColor="@color/background_darkblue"
+            android:textSize="24sp" />
 
     </LinearLayout>
 

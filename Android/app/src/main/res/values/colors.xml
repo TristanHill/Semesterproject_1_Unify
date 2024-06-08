@@ -14,4 +14,6 @@
     <color name="bottom_nav_color_active_question">@color/green</color>
     <color name="bottom_nav_color_active_survey">@color/orange</color>
     <color name="bottom_nav_color_inactive">@color/fontBlue</color>
+    <color name="survey_option_background_default">#FFFFFF</color>
+    <color name="survey_option_background_selected">#19adf7</color>
 </resources>
