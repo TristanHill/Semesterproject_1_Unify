@@ -20,13 +20,17 @@ class JoinSessionActivity : AppCompatActivity(), View.OnClickListener {
         binding.activityJoinSessionButton.setOnClickListener(this)
     }
 
+    // onClick method to handle click events on views
     override fun onClick(v: View?) {
+        // Check the ID of the clicked view
         when (v?.id) {
             R.id.activity_join_session_button -> {
-                // Start QRCodeScannerActivity when the "Join Session" button is clicked
+                // Create an intent to start the QRCodeScannerActivity
                 startActivity(Intent(this, QRCodeScannerActivity::class.java))
             }
+            // Default case if an unexpected view ID is encountered
             else -> {
+                // Log an error message with the unexpected view ID
                 Log.e(TAG, "JoinSessionActivity::onClick unexpected ID encountered (${v?.id})")
             }
         }

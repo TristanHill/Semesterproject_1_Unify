@@ -13,13 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import at.fhooe.sail.android.lists.a.OptionsAdapter
 import at.fhooe.sail.project.semesterproject1.databinding.FragmentSurveyBinding
-import com.google.android.play.integrity.internal.i
-import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+// Fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
@@ -29,20 +27,30 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-class Fragment_survey : Fragment(),     OnItemClickListener {
-    // TODO: Rename and change types of parameters
+class Fragment_survey : Fragment(), OnItemClickListener {
+
     private lateinit var adapter: OptionsAdapter
-    private  lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
+    // List to hold survey options
     private var optionList: MutableList<Option> = mutableListOf<Option>()
 
-    var _binding: FragmentSurveyBinding? = null
-    val binding: FragmentSurveyBinding
+    private var _binding: FragmentSurveyBinding? = null
+    private val binding: FragmentSurveyBinding
         get() = _binding!!
-    val db: FirebaseFirestore = Firebase.firestore
+
+    private val db: FirebaseFirestore = Firebase.firestore
+
+    // Session ID and User ID passed as arguments
     private var sessionId: String? = null
     private var userId: String? = null
+
+    // Survey data object
     private var survey: Survey? = null
 
+    /**
+     * Called when the fragment is created.
+     * Retrieves session and user IDs from the arguments and sets up a listener for Firestore changes.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -50,7 +58,8 @@ class Fragment_survey : Fragment(),     OnItemClickListener {
             userId = it.getString("userId")
         }
 
-        if(sessionId != null){
+        // Listen for changes in the session document
+        if (sessionId != null) {
             db.collection("Session").document(sessionId!!)
                 .addSnapshotListener { snapshot, error ->
                     if (error != null) {
@@ -58,14 +67,17 @@ class Fragment_survey : Fragment(),     OnItemClickListener {
                         return@addSnapshotListener
                     }
 
+                    // Update the survey data if the document exists
                     if (snapshot != null && snapshot.exists()) {
                         val surveyHashMap = snapshot.data?.get("survey") as HashMap<String, Any>?
-                        if(surveyHashMap != null){
-                            survey =  Survey(surveyHashMap["surveyTitle"].toString(), surveyHashMap["surveyOptions"] as ArrayList<String>)
+                        if (surveyHashMap != null) {
+                            survey = Survey(
+                                surveyHashMap["surveyTitle"].toString(),
+                                surveyHashMap["surveyOptions"] as ArrayList<String>
+                            )
                             dataInitialize()
                             Log.d(TAG, survey.toString())
                         }
-
                     } else {
                         Log.d("Firestore", "Document has been deleted!")
                     }
@@ -73,31 +85,41 @@ class Fragment_survey : Fragment(),     OnItemClickListener {
         }
     }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        this
+        // Inflate the layout using view binding
         _binding = FragmentSurveyBinding.inflate(inflater)
         return binding.root
     }
 
+    /**
+     * Handles item click events from the RecyclerView.
+     */
     override fun onItemClick(position: Int) {
-        // Handle the click event and position here
+        // Update the user's selected survey option
         updateUserSurveyOption(position)
         Toast.makeText(context, "Clicked item position: $position", Toast.LENGTH_SHORT).show()
     }
+
+    /**
+     * Called immediately after onCreateView has returned.
+     * Initializes data and sets up the RecyclerView.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataInitialize()
-        val layoutManager = LinearLayoutManager(context)
+
+        // Set up the RecyclerView with a layout manager and adapter
         recyclerView = view.findViewById(R.id.fragment_survey_recycler_view)
-        val recycler: RecyclerView = binding.fragmentSurveyRecyclerView
-        adapter = OptionsAdapter(optionList,  this)
-        recycler.adapter = adapter
-            recycler.layoutManager = GridLayoutManager(context,1)
-        recycler.addItemDecoration(object: RecyclerView.ItemDecoration() {
+        adapter = OptionsAdapter(optionList, this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(context, 1)
+        recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
                 view: View,
@@ -112,36 +134,39 @@ class Fragment_survey : Fragment(),     OnItemClickListener {
         })
     }
 
-    public fun updateUserSurveyOption(optionIndex: Int?){
-        if(sessionId != null && userId != null){
+    /**
+     * Updates the user's selected survey option in Firestore.
+     */
+    public fun updateUserSurveyOption(optionIndex: Int?) {
+        if (sessionId != null && userId != null) {
             db.collection("Session").document(sessionId!!).collection("User").document(userId!!)
-                .update("surveyOption",optionIndex)
+                .update("surveyOption", optionIndex)
                 .addOnSuccessListener {
-
-                }.addOnFailureListener{
-
+                    // Successfully updated the survey option
+                }.addOnFailureListener {
+                    // Failed to update the survey option
                 }
         }
     }
 
+    /**
+     * Initializes the data for the survey options and sets up the RecyclerView adapter.
+     */
     private fun dataInitialize() {
-        if(survey != null) {
-            binding.fragmentSurveyTv.setText(survey?.surveyTitle)
+        if (survey != null) {
+            binding.fragmentSurveyTv.text = survey?.surveyTitle
             optionList = mutableListOf<Option>()
 
-            //needs to be modified to go from 0.. amount of options, Option(surveyString, i)
-            for(i in 0 .. survey?.surveyOptions!!.size-1){
+            // Populate the option list with survey options
+            for (i in 0 until survey?.surveyOptions!!.size) {
                 optionList.add(Option(survey?.surveyOptions!![i]))
             }
 
-            Log.d("Kathi", optionList.toString())
-
             val layoutManager = LinearLayoutManager(context)
             recyclerView = binding.fragmentSurveyRecyclerView
-            val recycler: RecyclerView = binding.fragmentSurveyRecyclerView
-            recycler.adapter = OptionsAdapter(optionList, this)
-            recycler.layoutManager = GridLayoutManager(context,1)
-            recycler.addItemDecoration(object: RecyclerView.ItemDecoration() {
+            recyclerView.adapter = OptionsAdapter(optionList, this)
+            recyclerView.layoutManager = GridLayoutManager(context, 1)
+            recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
                 override fun getItemOffsets(
                     outRect: Rect,
                     view: View,
@@ -159,14 +184,12 @@ class Fragment_survey : Fragment(),     OnItemClickListener {
 
     companion object {
         /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
+         * Factory method to create a new instance of this fragment using the provided parameters.
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
          * @return A new instance of fragment fragment_survey.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             Fragment_survey().apply {
