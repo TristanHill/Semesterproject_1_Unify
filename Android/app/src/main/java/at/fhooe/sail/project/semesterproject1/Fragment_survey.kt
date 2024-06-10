@@ -2,6 +2,8 @@ package at.fhooe.sail.project.semesterproject1
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -86,7 +88,21 @@ class Fragment_survey : Fragment(),     OnItemClickListener {
     override fun onItemClick(position: Int) {
         // Handle the click event and position here
         updateUserSurveyOption(position)
-        Toast.makeText(context, "Clicked item position: $position", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "${survey!!.surveyOptions[position]}", Toast.LENGTH_SHORT).show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            // Replace the current fragment with a new one
+            val newFragment = Fragment_nosurvey() // Replace with your new fragment class
+            val fragmentManager = parentFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+
+            // Optionally add this transaction to the back stack
+            fragmentTransaction.replace(R.id.activity_main_frameLayout, newFragment)
+            fragmentTransaction.addToBackStack(null)
+
+            fragmentTransaction.commit()
+        }, 200)
+
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -110,6 +126,7 @@ class Fragment_survey : Fragment(),     OnItemClickListener {
                 outRect.bottom = 10
             }
         })
+
     }
 
     public fun updateUserSurveyOption(optionIndex: Int?){

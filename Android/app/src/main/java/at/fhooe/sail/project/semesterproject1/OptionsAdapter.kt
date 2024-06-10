@@ -16,6 +16,7 @@ import com.google.firebase.firestore.firestore
 
 class OptionsAdapter(val mData: List<Option>,val listener: OnItemClickListener) : RecyclerView.Adapter<OptionsAdapter.OptionHolder>(){
 
+    private var selectedPosition = RecyclerView.NO_POSITION
     inner class OptionHolder(val root: View): RecyclerView.ViewHolder(root), View.OnClickListener{
         var mContent: TextView
         val db: FirebaseFirestore = Firebase.firestore
@@ -45,7 +46,12 @@ class OptionsAdapter(val mData: List<Option>,val listener: OnItemClickListener) 
 
     override fun onBindViewHolder(holder: OptionHolder, position: Int) {
         holder.mContent.text = mData[position].content
+
     }
 
+    fun setSelectedPosition(position: Int) {
+        selectedPosition = position
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int = mData.size
 }

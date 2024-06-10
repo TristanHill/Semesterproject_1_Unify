@@ -2,6 +2,7 @@ package at.fhooe.sail.project.semesterproject1
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -59,7 +60,33 @@ class Fragment_status : Fragment() {
         val drawableHelpPressed = R.drawable.fragment_status_button_pressed_help
         val drawableDonePressed = R.drawable.fragment_status_button_pressed_done
 
-        changeButtonColor(this@Fragment_status, fragmentStatusButtonWorking, drawableWorkingPressed)
+        db.collection("Session").document(sessionId!!).collection("User").document(userId!!).get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    when(document.data?.get("status")){
+                        "Need Help" -> {
+                            changeButtonColor(this@Fragment_status, fragmentStatusButtonHelp, drawableHelpPressed)
+                        }
+
+                        "In Progress" -> {
+                            changeButtonColor(this@Fragment_status, fragmentStatusButtonWorking, drawableWorkingPressed)
+                        }
+
+                        "Done" -> {
+                            changeButtonColor(this@Fragment_status, fragmentStatusButtonDone, drawableDonePressed)
+                        }
+
+                        else -> {
+                            changeButtonColor(this@Fragment_status, fragmentStatusButtonWorking, drawableWorkingPressed)
+                        }
+                    }
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
 
 
         fragmentStatusButtonWorking.setOnClickListener {
@@ -81,10 +108,6 @@ class Fragment_status : Fragment() {
         }
 
         return binding.root
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun resetOtherButtons(selectedButton: AppCompatButton, vararg otherButtons: AppCompatButton) {
