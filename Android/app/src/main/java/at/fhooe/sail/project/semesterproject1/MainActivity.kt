@@ -48,51 +48,71 @@ class MainActivity : AppCompatActivity() {
         // Set up the navigation view
         setNavigationView()
 
-        // Retrieve the session name text view and set up a Firestore listener for session data
         val sessionName = findViewById<TextView>(R.id.toolbar_session_name)
         if (sessionID != null) {
-            db.collection("Session").document(sessionID)
-                .addSnapshotListener { snapshot, error ->
-                    if (error != null) {
-                        Log.w("Firestore", "Listen failed.", error)
-                        return@addSnapshotListener
-                    }
+            db.collection("Session").document(sessionID).addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Log.w("Firestore", "Listen failed.", error)
+                    return@addSnapshotListener
+                }
 
-                    if (snapshot != null && snapshot.exists()) {
-                        Log.d("Firestore", "Current data: ${snapshot.data}")
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d("Firestore", "Current data: ${snapshot.data}")
 
-                        surveyHashMap = snapshot.data?.get("survey") as HashMap<String, Any>?
+                    surveyHashMap = snapshot.data?.get("survey") as HashMap<String, Any>?
 
-                        // Update the UI based on whether survey data exists or not
-                        if (surveyHashMap == null) {
-                            db.collection("Session").document(sessionID).collection("User").document(userID)
+                    if (surveyHashMap == null) {
+                        db.collection("Session")
+                                .document(sessionID!!)
+                                .collection("User")
+                                .document(userID!!)
                                 .update("surveyOption", -1)
 
-                            if (supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout)!!::class == Fragment_survey::class) {
-                                replaceFragment(Fragment_nosurvey())
-                            }
-
-                        } else {
-                            if (supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout)!!::class == Fragment_nosurvey::class) {
-                                replaceFragment(Fragment_survey())
-                            }
+                        if (supportFragmentManager.findFragmentById(
+                                        R.id.activity_main_frameLayout
+                                )!!::class == Fragment_survey::class
+                        ) {
+                            replaceFragment(Fragment_nosurvey())
                         }
-
-                        setNavigationView()
-
-                        sessionName.text = snapshot.data?.get("name").toString()
                     } else {
-                        Log.d("Firestore", "Document has been deleted!")
-                        deleteUser()
+
+                        db.collection("Session")
+                                .document(sessionID!!)
+                                .collection("User")
+                                .document(userID!!)
+                                .get()
+                                .addOnSuccessListener { document ->
+                                    if (document != null) {
+                                        if ((document.data?.get("surveyOption") as Long) > -1) {
+                                            replaceFragment(Fragment_nosurvey())
+                                        } else if (supportFragmentManager.findFragmentById(
+                                                        R.id.activity_main_frameLayout
+                                                )!!::class == Fragment_nosurvey::class
+                                        ) {
+                                            replaceFragment(Fragment_survey())
+                                        }
+                                    } else {
+                                        Log.d(TAG, "No such document")
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.d(TAG, "get failed with ", exception)
+                                }
                     }
+
+                    setNavigationView()
+
+                    sessionName.setText(snapshot.data?.get("name").toString())
+                } else {
+                    Log.d("Firestore", "Document has been deleted!")
+                    deleteUser()
                 }
+            }
         }
 
         // Set up the leave button to delete the user and finish the activity when clicked
         val leaveButton = findViewById<ImageView>(R.id.toolbar_leave_session)
-        leaveButton.setOnClickListener {
-            deleteUser()
-        }
+        leaveButton.setOnClickListener { deleteUser() }
     }
 
     private fun setNavigationView() {
@@ -103,11 +123,21 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.question_item -> replaceFragment(Fragment_question())
                 R.id.survey_item -> {
-                    if (surveyHashMap == null) {
-                        replaceFragment(Fragment_nosurvey())
-                    } else {
-                        replaceFragment(Fragment_survey())
-                    }
+
+                    db.collection("Session")
+                            .document(sessionID!!)
+                            .collection("User")
+                            .document(userID!!)
+                            .get()
+                            .addOnSuccessListener { document ->
+                                if (surveyHashMap != null &&
+                                                (document.data?.get("surveyOption") as Long) < 0
+                                ) {
+                                    replaceFragment(Fragment_survey())
+                                } else {
+                                    replaceFragment(Fragment_nosurvey())
+                                }
+                            }
                 }
                 else -> {}
             }
@@ -125,23 +155,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Method to delete the user from the Firestore database and clear shared preferences
     private fun deleteUser() {
         if (sessionID != null && userID != null) {
-            db.collection("Session").document(sessionID).collection("User").document(userID)
-                .delete()
-                .addOnSuccessListener {
-                    Log.d(TAG, "User successfully deleted!")
-                    with(sharedPref.edit()) {
-                        remove("SessionID")
-                        remove("UserID")
-                        apply()
+            db.collection("Session")
+                    .document(sessionID)
+                    .collection("User")
+                    .document(userID)
+                    .delete()
+                    .addOnSuccessListener {
+                        Log.d(TAG, "User successfully deleted!")
+                        with(sharedPref.edit()) {
+                            remove("SessionID")
+                            remove("UserID")
+                            apply()
+                        }
+                        finish()
                     }
-                    finish()
-                }
-                .addOnFailureListener { e ->
-                    Log.w(TAG, "Error deleting user", e)
-                }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error deleting user", e) }
         }
     }
 }
