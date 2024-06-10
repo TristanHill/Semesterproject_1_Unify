@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                         db.collection("Session").document(sessionID!!).collection("User").document(userID!!).get()
                             .addOnSuccessListener { document ->
                                 if (document != null) {
-                                    if ( (document.data?.get("surveyOption") as Long) > -1){
+                                    if (supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout)!!::class==Fragment_survey::class && document.data?.get("surveyOption") != null && (document.data?.get("surveyOption") as Long) > -1){
                                         replaceFragment(Fragment_nosurvey())
                                     } else if(supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout)!!::class==Fragment_nosurvey::class){
                                         replaceFragment(Fragment_survey())
@@ -106,7 +106,7 @@ class MainActivity : AppCompatActivity() {
 
                     db.collection("Session").document(sessionID!!).collection("User").document(userID!!).get()
                         .addOnSuccessListener { document ->
-                            if(surveyHashMap!=null &&(document.data?.get("surveyOption") as Long)<0){
+                            if(surveyHashMap!=null && document.data?.get("surveyOption") != null && (document.data?.get("surveyOption") as Long)<0){
                                 replaceFragment(Fragment_survey())
                             } else {
                                 replaceFragment(Fragment_nosurvey())
