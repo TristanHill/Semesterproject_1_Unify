@@ -16,4 +16,6 @@
     <color name="bottom_nav_color_inactive">@color/fontBlue</color>
     <color name="survey_option_background_default">#FFFFFF</color>
     <color name="survey_option_background_selected">#19adf7</color>
+    <color name="selected_item">#FFBB86FC</color>
+    <color name="unselected_item">#FFFFFFFF</color>
 </resources>

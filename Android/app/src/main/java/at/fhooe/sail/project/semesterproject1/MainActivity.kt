@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                             db.collection("Session").document(sessionID!!).collection("User").document(userID!!)
                                 .update("surveyOption",-1)
 
-                            if(supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout)!!::class==Fragment_survey::class){
+                            if(supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout)!!::class==FragmentSurvey::class){
                                 replaceFragment(Fragment_nosurvey())
                             }
 
@@ -64,10 +64,10 @@ class MainActivity : AppCompatActivity() {
                             db.collection("Session").document(sessionID!!).collection("User").document(userID!!).get()
                                 .addOnSuccessListener { document ->
                                     if (document != null) {
-                                        if ((supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout)!!::class==Fragment_survey::class) && document.data?.get("surveyOption") != null && (document.data?.get("surveyOption") as Long) > -1){
+                                        if ((supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout)!!::class==FragmentSurvey::class) && document.data?.get("surveyOption") != null && (document.data?.get("surveyOption") as Long) > -1){
                                             replaceFragment(Fragment_nosurvey())
                                         } else if(supportFragmentManager.findFragmentById(R.id.activity_main_frameLayout)!!::class==Fragment_nosurvey::class){
-                                            replaceFragment(Fragment_survey())
+                                            replaceFragment(FragmentSurvey())
                                         }
                                     } else {
                                         Log.d(TAG, "No such document")
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
                     db.collection("Session").document(sessionID!!).collection("User").document(userID!!).get()
                         .addOnSuccessListener { document ->
                             if(surveyHashMap!=null &&document.data?.get("surveyOption") != null && (document.data?.get("surveyOption") as Long)<0){
-                                replaceFragment(Fragment_survey())
+                                replaceFragment(FragmentSurvey())
                             } else {
                                 replaceFragment(Fragment_nosurvey())
                             }

@@ -1,31 +1,23 @@
-package at.fhooe.sail.android.lists.a
+package at.fhooe.sail.project.semesterproject1
 
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import at.fhooe.sail.project.semesterproject1.OnItemClickListener
-import at.fhooe.sail.project.semesterproject1.Option
-import at.fhooe.sail.project.semesterproject1.R
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
 
-class OptionsAdapter(val mData: List<Option>, val listener: OnItemClickListener) :
-        RecyclerView.Adapter<OptionsAdapter.OptionHolder>() {
+class OptionsAdapter(
+    private val mData: List<Option>,
+    private val listener: OnItemClickListener
+) : RecyclerView.Adapter<OptionsAdapter.OptionHolder>() {
 
-    private var selectedPosition = RecyclerView.NO_POSITION
+    private var selectedPosition: Int? = null
+
     inner class OptionHolder(val root: View) : RecyclerView.ViewHolder(root), View.OnClickListener {
-        var mContent: TextView
-        val db: FirebaseFirestore = Firebase.firestore
-        private lateinit var sharedPref: SharedPreferences
-        private lateinit var sessionID: String
-        private lateinit var userID: String
+        val mContent: TextView = root.findViewById(R.id.fragment_survey_option_tv)
+
         init {
-            // Initialize the TextView from the layout
-            mContent = root.findViewById(R.id.fragment_survey_option_tv) as TextView
-            // Set up click listener for the root view
             root.setOnClickListener(this)
         }
 
@@ -33,22 +25,35 @@ class OptionsAdapter(val mData: List<Option>, val listener: OnItemClickListener)
             val position = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
+                setSelectedPosition(position)
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OptionHolder {
-        val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = layoutInflater.inflate(R.layout.fragment_survey_option, null)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.fragment_survey_option, parent, false)
         return OptionHolder(view)
     }
 
     override fun onBindViewHolder(holder: OptionHolder, position: Int) {
         holder.mContent.text = mData[position].content
+
+        val context = holder.itemView.context
+        val colorRes = if (selectedPosition == position) {
+            ContextCompat.getColor(context, R.color.selected_item)
+        } else {
+            ContextCompat.getColor(context, R.color.unselected_item)
+        }
+        holder.itemView.setBackgroundColor(colorRes)
     }
 
-    fun setSelectedPosition(position: Int) {
-        selectedPosition = position
-        notifyDataSetChanged()
+    private fun setSelectedPosition(newPos: Int) {
+        val old = selectedPosition
+        selectedPosition = newPos
+        old?.let { notifyItemChanged(it) }
+        notifyItemChanged(newPos)
     }
+
     override fun getItemCount(): Int = mData.size
 }
